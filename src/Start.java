@@ -19,6 +19,9 @@ public class Start extends ReadWriteUsersData{
         switch (choice){
             case 1: LogIn();
                 break;
+            case 2:
+                CreateAccount();
+                break;
             default:
                 HomePage();
                 break;
@@ -51,5 +54,24 @@ public class Start extends ReadWriteUsersData{
         else {
             LogIn();
         }
+    }
+    public void CreateAccount(){
+        ArrayList<User> users = ReadUsersData();
+        Scanner in = new Scanner(System.in);
+
+        System.out.println("=-- Create Account --=");
+        System.out.println("Enter your name: ");
+        String name = in.nextLine();
+        System.out.println("Enter your phone number: ");
+        String phoneNumber = in.nextLine();
+        System.out.println("Enter your login: ");
+        String login = in.nextLine();
+        System.out.println("Enter your password: ");
+        String password = in.nextLine();
+        User newUser = new User(name,phoneNumber,login,password);
+        users.add(newUser);
+        WriteUsersData(users);
+
+        System.out.println("Good");
     }
 }
