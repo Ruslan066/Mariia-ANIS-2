@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Start extends ReadWriteUsersData{
 
-    private User logInUser = new User();
+    private User logInUser;
     public Start() {
         HomePage();
     }
@@ -49,7 +49,7 @@ public class Start extends ReadWriteUsersData{
         }
         if(log && pass){
             System.out.println("Access good");
-            System.out.println("Welcome: " + this.logInUser.getName());
+            System.out.println("Welcome: " + this.logInUser.getName() + " isEmployee: " + this.logInUser.isEmployee());
         }
         else {
             LogIn();
@@ -68,7 +68,7 @@ public class Start extends ReadWriteUsersData{
         String login = in.nextLine();
         System.out.println("Enter your password: ");
         String password = in.nextLine();
-        User newUser = new User(name,phoneNumber,login,password);
+        Client newUser = new Client(name,phoneNumber,login,password);
         users.add(newUser);
         WriteUsersData(users);
 

@@ -9,22 +9,24 @@ public class Main extends Start{
     public static void main(String[] args) {
 
 // USER
-//        ArrayList<User> users = new ArrayList<>();
-//         User Ruslan = new User("Ruslan", "421951305305", "LuxLux", "123456");
-//        User Maria = new User("Maria", "421951306306", "MariMari", "001122");
-//        User Tom = new User("Tom", "421951123123", "KobiKo", "159753");
-//        User Daniela = new User("Daniela", "421951741258", "DaniEll", "020200");
-//
-//        users.add(Ruslan);
-//        users.add(Maria);
-//        users.add(Tom);
-//        users.add(Daniela);
-//        WriteUsersData(users);
+        ArrayList<User> users = new ArrayList<>();
+        Client Ruslan = new Client("Ruslan", "421951305305", "LuxLux", "123456");
+        Client Maria = new Client("Maria", "421951306306", "MariMari", "001122");
+        Client Tom = new Client("Tom", "421951123123", "KobiKo", "159753");
+        Employee Daniela = new Employee("Daniela", "421951741258", "DELL", "020202");
 
+        users.add(Ruslan);
+        users.add(Maria);
+        users.add(Tom);
+        users.add(Daniela);
+        WriteUsersData(users);
 
+        ArrayList<User> users2 = ReadUsersData();
+        users2.get(0).ShowUserInfo();
+        System.out.println();
+        users2.get(3).ShowUserInfo();
 
-
-        new Start();
+      // new Start();
 
 
 //SHOP ITEM

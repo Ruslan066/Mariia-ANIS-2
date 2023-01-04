@@ -6,9 +6,9 @@ import java.util.ArrayList;
 
 public class ReadWriteUsersData {
 
-    public  void WriteUsersData(ArrayList<User> users){
+    public static void WriteUsersData(ArrayList<User> users){
         try {
-            FileOutputStream file = new FileOutputStream("file.txt");
+            FileOutputStream file = new FileOutputStream("file2.txt");
 
             // Creates an ObjectOutputStream
             ObjectOutputStream output = new ObjectOutputStream(file);
@@ -21,10 +21,10 @@ public class ReadWriteUsersData {
             e.getStackTrace();
         }
     }
-    public  ArrayList<User> ReadUsersData(){
+    public static ArrayList<User> ReadUsersData(){
         ArrayList<User> users = new ArrayList<User>();
         try {
-            FileInputStream fileStream = new FileInputStream("file.txt");
+            FileInputStream fileStream = new FileInputStream("file2.txt");
 
             // Creates an ObjectInputStream
             ObjectInputStream input = new ObjectInputStream(fileStream);
