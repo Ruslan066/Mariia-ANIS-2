@@ -1,3 +1,5 @@
+package users;
+
 public class Client extends User{
     private int money;
     private String discountCard;
@@ -17,7 +19,7 @@ public class Client extends User{
     @Override
     public void ShowUserInfo() {
             System.out.println(
-                    "=-- Client info --="+
+                    "=-- users.Client info --="+
                     "\nName: " + super.getName() +
                     "\nPhone: " + super.getPhoneNumber() +
                     "\nLogin: " + super.getLogin() +

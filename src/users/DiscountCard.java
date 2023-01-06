@@ -1,3 +1,5 @@
+package users;
+
 public enum DiscountCard {
     NO_CARD(0),
     FIRST_LVL (10),

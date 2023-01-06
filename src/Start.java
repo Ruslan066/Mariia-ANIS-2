@@ -1,3 +1,8 @@
+import users.DiscountCard;
+import users.Client;
+import users.Employee;
+import users.User;
+
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -5,6 +10,8 @@ import java.util.Scanner;
 public class Start extends ReadWriteUsersData {
 
     private User logInUser;
+    private ArrayList<User> users;
+    private int idUser;
 
     public Start() {
         HomePage();
@@ -38,7 +45,7 @@ public class Start extends ReadWriteUsersData {
     }
 
     private void LogIn() {
-        ArrayList<User> users = ReadUsersData();
+        users = ReadUsersData();
         //users.get(0).ShowUserInfo();
         Scanner in = new Scanner(System.in);
         boolean log = false;
@@ -49,13 +56,16 @@ public class Start extends ReadWriteUsersData {
         String login = in.nextLine();
         System.out.println("Enter your password: ");
         String password = in.nextLine();
+        int i =0;
         for (User user : users) {
             log = Objects.equals(login, user.getLogin());
             pass = Objects.equals(password, user.getPassword());
             if (log && pass) {
                 this.logInUser = user;
+                idUser=i;
                 break;
             }
+            i++;
         }
         if (log && pass) {
             System.out.println("Access good");
@@ -68,7 +78,7 @@ public class Start extends ReadWriteUsersData {
     }
 
     private void CreateAccount() {
-        ArrayList<User> users = ReadUsersData();
+        users = ReadUsersData();
         Scanner in = new Scanner(System.in);
 
         System.out.println("=-- Create Account --=");
@@ -85,9 +95,13 @@ public class Start extends ReadWriteUsersData {
         if (Objects.equals(isEmployee, "false")) {
             Client newUser = new Client(name, phoneNumber, login, password);
             users.add(newUser);
+            idUser = users.size()-1;
+            logInUser = users.get(idUser);
         } else if (Objects.equals(isEmployee, "true")) {
             Employee newUser = new Employee(name, phoneNumber, login, password);
             users.add(newUser);
+            idUser = users.size()-1;
+            logInUser = users.get(idUser);
         } else {
             System.out.println("You type the wrong value: true or false");
             CreateAccount();
@@ -101,7 +115,7 @@ public class Start extends ReadWriteUsersData {
         System.out.println("1: View info about my account");
         System.out.println("2: View the list of purchased products");
         System.out.println("3: Choose a store");
-        System.out.println("4: Exit");
+        System.out.println("4: Exit" + users.size());
         Scanner in = new Scanner(System.in);
         int choice = in.nextInt();
         switch (choice) {
@@ -136,6 +150,8 @@ public class Start extends ReadWriteUsersData {
                 System.out.println("Deposit amount:");
                 int amount = in.nextInt();
                 logInUser.MakeDeposit(amount);
+                users.set(idUser, logInUser);
+                WriteUsersData(users);
                 UserInfo();
                 break;
             case 2:
@@ -150,6 +166,9 @@ public class Start extends ReadWriteUsersData {
                 String card = in2.nextLine();
 
                 logInUser.SetDiscountCard(card);
+
+                users.set(idUser, logInUser);
+                WriteUsersData(users);
                 UserInfo();
                 break;
             case 3:
@@ -167,11 +186,29 @@ public class Start extends ReadWriteUsersData {
         }
 
         if (logInUser.isEmployee()) {
-            System.out.println("You are Employee");
+            System.out.println("You are users.Employee");
         } else {
-            System.out.println("You are Client");
+            System.out.println("You are users.Client");
         }
 
         System.out.println("Good");
+    }
+
+    public void CreateBasicListUsers(){
+        ArrayList<users.User> users = new ArrayList<>();
+        users.Client Ruslan = new users.Client("Ruslan", "421951305305", "LuxLux", "123456");
+        users.Client Maria = new users.Client("Maria", "421951306306", "MariMari", "001122");
+        users.Client Tom = new users.Client("Tom", "421951123123", "KobiKo", "159753");
+        users.Employee Daniela = new users.Employee("Daniela", "421951741258", "DELL", "020202");
+
+        users.add(Ruslan);
+        users.add(Maria);
+        users.add(Tom);
+        users.add(Daniela);
+        WriteUsersData(users);
+//        ArrayList<users.User> users2 = ReadUsersData();
+//        users2.get(0).ShowUserInfo();
+//        System.out.println();
+//        users2.get(3).ShowUserInfo();
     }
 }
