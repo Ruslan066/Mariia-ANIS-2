@@ -14,4 +14,13 @@ public class Employee extends User{
                         "\nisEmployee: " + super.isEmployee());
     }
 
+    @Override
+    public void MakeDeposit(int deposit) {
+    }
+
+    @Override
+    public void SetDiscountCard(String card) {
+
+    }
+
 }

@@ -20,13 +20,13 @@ public class Main extends Start{
         users.add(Tom);
         users.add(Daniela);
         WriteUsersData(users);
+//
+//        ArrayList<User> users2 = ReadUsersData();
+//        users2.get(0).ShowUserInfo();
+//        System.out.println();
+//        users2.get(3).ShowUserInfo();
 
-        ArrayList<User> users2 = ReadUsersData();
-        users2.get(0).ShowUserInfo();
-        System.out.println();
-        users2.get(3).ShowUserInfo();
-
-      // new Start();
+       new Start();
 
 
 //SHOP ITEM

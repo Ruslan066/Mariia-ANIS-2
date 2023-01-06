@@ -17,6 +17,8 @@ public abstract class User implements Serializable {
     public User() {}
 
     public abstract void ShowUserInfo();
+    public abstract void MakeDeposit(int deposit);
+    public abstract void SetDiscountCard(String card);
 
     public String getLogin() {
         return login;

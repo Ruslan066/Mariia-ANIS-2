@@ -8,7 +8,7 @@ public class ReadWriteUsersData {
 
     public static void WriteUsersData(ArrayList<User> users){
         try {
-            FileOutputStream file = new FileOutputStream("file2.txt");
+            FileOutputStream file = new FileOutputStream("usersData.txt");
 
             // Creates an ObjectOutputStream
             ObjectOutputStream output = new ObjectOutputStream(file);
@@ -24,7 +24,7 @@ public class ReadWriteUsersData {
     public static ArrayList<User> ReadUsersData(){
         ArrayList<User> users = new ArrayList<User>();
         try {
-            FileInputStream fileStream = new FileInputStream("file2.txt");
+            FileInputStream fileStream = new FileInputStream("usersData.txt");
 
             // Creates an ObjectInputStream
             ObjectInputStream input = new ObjectInputStream(fileStream);

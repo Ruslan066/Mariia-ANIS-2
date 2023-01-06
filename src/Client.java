@@ -17,19 +17,23 @@ public class Client extends User{
     @Override
     public void ShowUserInfo() {
             System.out.println(
-                    "Name: " + super.getName() +
-                            "\nPhone: " + super.getPhoneNumber() +
-                            "\nLogin: " + super.getLogin() +
-                            "\nPassword: " + super.getPassword() +
-                            "\nMoney: " + this.money+
-                            "\nDiscount Card: " + this.discountCard+
-                            "\nDiscount Percent: " + this.discountPercent+
-                            "\nisEmployee: " + super.isEmployee());
+                    "=-- Client info --="+
+                    "\nName: " + super.getName() +
+                    "\nPhone: " + super.getPhoneNumber() +
+                    "\nLogin: " + super.getLogin() +
+                    "\nPassword: " + super.getPassword() +
+                    "\nMoney: " + this.money+
+                    "\nDiscount Card: " + this.discountCard+
+                    " - " + this.discountPercent+ "%"+
+                    "\nisEmployee: " + super.isEmployee());
     }
 
+    @Override
     public void MakeDeposit(int deposit) {
         this.money += deposit;
     }
+
+    @Override
     public void SetDiscountCard(String card) {
         for (DiscountCard dc : DiscountCard.values()) {
             if (dc.name().equals(card)) {
