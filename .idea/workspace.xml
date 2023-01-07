@@ -4,22 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ddaf963a-dcfe-4c98-b568-29f5f8ecdb52" name="Changes" comment="CreateAccount complete">
-      <change afterPath="$PROJECT_DIR$/src/shops/Copyable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/shops/ShopFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/shops/ShoppingCart.java" afterDir="false" />
+    <list default="true" id="ddaf963a-dcfe-4c98-b568-29f5f8ecdb52" name="Changes" comment="User / Client / Employee - access isEmployee. complete">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/users/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DiscountCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/users/DiscountCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Display.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/users/Employee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/shops/Item.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ReadWriteUsersData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReadWriteUsersData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/shops/Shop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ReadWriteUsersData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReadWriteData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Start.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Start.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/users/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shops/Copyable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/shops/Copyable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shops/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/shops/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shops/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/shops/Shop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shops/ShopFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/shops/ShopFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/users/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/users/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usersData.txt" beforeDir="false" afterPath="$PROJECT_DIR$/usersData.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -81,7 +75,9 @@
       <workItem from="1672229341361" duration="266000" />
       <workItem from="1672229679518" duration="1042000" />
       <workItem from="1672761474312" duration="21379000" />
-      <workItem from="1672844947322" duration="3525000" />
+      <workItem from="1672844947322" duration="3661000" />
+      <workItem from="1672859452574" duration="5960000" />
+      <workItem from="1672868515621" duration="1191000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1672229477430</created>
@@ -104,7 +100,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672790591460</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="User / Client / Employee - access isEmployee. complete">
+      <created>1672849615291</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1672849615291</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -115,6 +118,7 @@
     <MESSAGE value="first commit" />
     <MESSAGE value="Login complete" />
     <MESSAGE value="CreateAccount complete" />
-    <option name="LAST_COMMIT_MESSAGE" value="CreateAccount complete" />
+    <MESSAGE value="User / Client / Employee - access isEmployee. complete" />
+    <option name="LAST_COMMIT_MESSAGE" value="User / Client / Employee - access isEmployee. complete" />
   </component>
 </project>

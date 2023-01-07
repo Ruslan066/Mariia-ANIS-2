@@ -1,5 +1,5 @@
 package shops;
 
 public interface Copyable {
-    Object copy();
+    Object copy(int id);
 }

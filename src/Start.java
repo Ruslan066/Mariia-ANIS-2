@@ -1,3 +1,4 @@
+import shops.Shop;
 import users.DiscountCard;
 import users.Client;
 import users.Employee;
@@ -7,10 +8,11 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class Start extends ReadWriteUsersData {
+public class Start extends ReadWriteData {
 
     private User logInUser;
     private ArrayList<User> users;
+    private ArrayList<Shop> shops;
     private int idUser;
 
     public Start() {
@@ -18,6 +20,7 @@ public class Start extends ReadWriteUsersData {
     }
 
     private void HomePage() {
+        shops = ReadShopData();
         System.out.println("=-- Welcome --=");
         System.out.println("1: LogIn");
         System.out.println("2: Create account");
@@ -33,7 +36,7 @@ public class Start extends ReadWriteUsersData {
                 CreateAccount();
                 break;
             case 3:
-                ShowShopInfo();
+                ShowShops();
                 break;
             case 4:
                 System.exit(0);
@@ -45,7 +48,8 @@ public class Start extends ReadWriteUsersData {
     }
 
     private void LogIn() {
-        users = ReadUsersData();
+        users = ReadUserData();
+
         //users.get(0).ShowUserInfo();
         Scanner in = new Scanner(System.in);
         boolean log = false;
@@ -56,13 +60,13 @@ public class Start extends ReadWriteUsersData {
         String login = in.nextLine();
         System.out.println("Enter your password: ");
         String password = in.nextLine();
-        int i =0;
+        int i = 0;
         for (User user : users) {
             log = Objects.equals(login, user.getLogin());
             pass = Objects.equals(password, user.getPassword());
             if (log && pass) {
                 this.logInUser = user;
-                idUser=i;
+                idUser = i;
                 break;
             }
             i++;
@@ -78,7 +82,7 @@ public class Start extends ReadWriteUsersData {
     }
 
     private void CreateAccount() {
-        users = ReadUsersData();
+        users = ReadUserData();
         Scanner in = new Scanner(System.in);
 
         System.out.println("=-- Create Account --=");
@@ -95,18 +99,18 @@ public class Start extends ReadWriteUsersData {
         if (Objects.equals(isEmployee, "false")) {
             Client newUser = new Client(name, phoneNumber, login, password);
             users.add(newUser);
-            idUser = users.size()-1;
+            idUser = users.size() - 1;
             logInUser = users.get(idUser);
         } else if (Objects.equals(isEmployee, "true")) {
             Employee newUser = new Employee(name, phoneNumber, login, password);
             users.add(newUser);
-            idUser = users.size()-1;
+            idUser = users.size() - 1;
             logInUser = users.get(idUser);
         } else {
             System.out.println("You type the wrong value: true or false");
             CreateAccount();
         }
-        WriteUsersData(users);
+        WriteUserData(users);
         Account();
     }
 
@@ -115,7 +119,7 @@ public class Start extends ReadWriteUsersData {
         System.out.println("1: View info about my account");
         System.out.println("2: View the list of purchased products");
         System.out.println("3: Choose a store");
-        System.out.println("4: Exit" + users.size());
+        System.out.println("4: Exit");
         Scanner in = new Scanner(System.in);
         int choice = in.nextInt();
         switch (choice) {
@@ -126,7 +130,7 @@ public class Start extends ReadWriteUsersData {
                 CreateAccount();
                 break;
             case 3:
-                ShowShopInfo();
+                ShowShops();
                 break;
             case 4:
                 logInUser = null;
@@ -137,7 +141,8 @@ public class Start extends ReadWriteUsersData {
                 break;
         }
     }
-    private void UserInfo(){
+
+    private void UserInfo() {
         logInUser.ShowUserInfo();
         System.out.println("1: Top up your account");
         System.out.println("2: Choose a discount card");
@@ -151,12 +156,12 @@ public class Start extends ReadWriteUsersData {
                 int amount = in.nextInt();
                 logInUser.MakeDeposit(amount);
                 users.set(idUser, logInUser);
-                WriteUsersData(users);
+                WriteUserData(users);
                 UserInfo();
                 break;
             case 2:
                 System.out.println("=-- Choose a discount card --=");
-                
+
                 System.out.print("Discount card: ");
                 for (DiscountCard card : DiscountCard.values()) {
                     System.out.print(card + ", ");
@@ -168,7 +173,7 @@ public class Start extends ReadWriteUsersData {
                 logInUser.SetDiscountCard(card);
 
                 users.set(idUser, logInUser);
-                WriteUsersData(users);
+                WriteUserData(users);
                 UserInfo();
                 break;
             case 3:
@@ -180,35 +185,53 @@ public class Start extends ReadWriteUsersData {
         }
     }
 
-    private void ShowShopInfo() {
-        if (logInUser == null) {
-            System.out.println("Not LogIn");
+    private void ShowShops() {
+        System.out.println("=-- Shops --=");
+        for (Shop shop : shops) {
+            shop.ShowShopInfo();
+            System.out.println("----------");
         }
+        if (logInUser != null) {
+            ChoiceShop();
+        }
+        GoBack();
 
         if (logInUser.isEmployee()) {
             System.out.println("You are users.Employee");
+
         } else {
             System.out.println("You are users.Client");
         }
 
         System.out.println("Good");
     }
-
-    public void CreateBasicListUsers(){
-        ArrayList<users.User> users = new ArrayList<>();
-        users.Client Ruslan = new users.Client("Ruslan", "421951305305", "LuxLux", "123456");
-        users.Client Maria = new users.Client("Maria", "421951306306", "MariMari", "001122");
-        users.Client Tom = new users.Client("Tom", "421951123123", "KobiKo", "159753");
-        users.Employee Daniela = new users.Employee("Daniela", "421951741258", "DELL", "020202");
-
-        users.add(Ruslan);
-        users.add(Maria);
-        users.add(Tom);
-        users.add(Daniela);
-        WriteUsersData(users);
-//        ArrayList<users.User> users2 = ReadUsersData();
-//        users2.get(0).ShowUserInfo();
-//        System.out.println();
-//        users2.get(3).ShowUserInfo();
+    private void ChoiceShop(){
+        System.out.println("Type id of shop for more detail or type exit to go back: ");
+        Scanner in = new Scanner(System.in);
+        String choice = in.nextLine();
+        if(Objects.equals(choice, "exit")){
+            Account();
+        }
+        try {
+            shops.get(Integer.parseInt(choice)).ShowShopInfoWithItems();
+        } catch (Exception ex) {
+            System.out.println("You type the wrong value: id");
+            ChoiceShop();
+        }
     }
+    private void GoBack(){
+        System.out.println("Type exit to go back: ");
+        Scanner in = new Scanner(System.in);
+        String choice = in.nextLine();
+        if(Objects.equals(choice, "exit")){
+            if (logInUser != null) {
+                Account();
+            } else {
+                HomePage();
+            }
+        }
+        GoBack();
+    }
+
+
 }

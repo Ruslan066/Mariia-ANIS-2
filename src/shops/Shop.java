@@ -1,8 +1,9 @@
 package shops;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Shop implements Copyable{
+public class Shop implements Copyable, Serializable {
     private int id;
     private String name;
     private String address;
@@ -24,25 +25,29 @@ public class Shop implements Copyable{
         items.add(item);
     }
 
-    public void ShowShopInfo() {
+    public void ShowShopInfoWithItems() {
         System.out.println(
                 "Name: " + this.name + ", Address: " + this.address + "\n----------");
         for (Item item : items) {
             item.ShowItemInfo();
         }
     }
+    public void ShowShopInfo() {
 
-    public void setName(String name) {
-        this.name = name;
+        System.out.println(
+                "id: " + this.id +
+                ", Name: " + this.name +
+                ", Address: " + this.address);
     }
 
-    public void setAddress(String address) {
+    public void setNameAddress(String name, String address) {
+        this.name = name;
         this.address = address;
     }
 
     @Override
-    public Object copy() {
-        Shop shop = new Shop(this.id, this.name, this.address, this.items);
+    public Object copy(int id) {
+        Shop shop = new Shop(id, this.name, this.address, this.items);
         return shop;
     }
 }

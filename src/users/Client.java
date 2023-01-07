@@ -19,7 +19,7 @@ public class Client extends User{
     @Override
     public void ShowUserInfo() {
             System.out.println(
-                    "=-- users.Client info --="+
+                    "=-- Client info --="+
                     "\nName: " + super.getName() +
                     "\nPhone: " + super.getPhoneNumber() +
                     "\nLogin: " + super.getLogin() +

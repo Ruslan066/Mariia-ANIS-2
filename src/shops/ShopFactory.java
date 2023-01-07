@@ -2,6 +2,7 @@ package shops;
 
 public class ShopFactory {
     Shop shop;
+    int id =0;
 
     public ShopFactory(Shop shop) {
         this.shop = shop;
@@ -10,6 +11,7 @@ public class ShopFactory {
         this.shop = shop;
     }
     public Shop CloneShop(){
-        return (Shop) shop.copy();
+        id++;
+        return (Shop) shop.copy(id);
     }
 }
