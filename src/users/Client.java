@@ -1,7 +1,7 @@
 package users;
 
 public class Client extends User{
-    private int money;
+    private double money;
     private String discountCard;
     private int discountPercent;
 
@@ -14,6 +14,16 @@ public class Client extends User{
 
     public Client(){
 
+    }
+
+    @Override
+    public void setMoney(double money) {
+        this.money -= money;
+    }
+
+    @Override
+    public double getMoney() {
+        return money;
     }
 
     @Override

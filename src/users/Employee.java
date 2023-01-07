@@ -25,4 +25,14 @@ public class Employee extends User{
 
     }
 
+    @Override
+    public void setMoney(double money) {
+
+    }
+
+    @Override
+    public double getMoney() {
+        return 0;
+    }
+
 }

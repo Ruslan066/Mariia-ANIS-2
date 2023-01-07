@@ -22,4 +22,15 @@ public class Item implements Serializable {
                         "\nCount: " + this.count+
                         "\n----------");
     }
+    public void ChangeCount(int count){
+        this.count -= count;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getCost() {
+        return cost;
+    }
 }

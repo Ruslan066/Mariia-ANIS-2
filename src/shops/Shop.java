@@ -2,6 +2,7 @@ package shops;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Shop implements Copyable, Serializable {
     private int id;
@@ -49,5 +50,9 @@ public class Shop implements Copyable, Serializable {
     public Object copy(int id) {
         Shop shop = new Shop(id, this.name, this.address, this.items);
         return shop;
+    }
+
+    public ArrayList<Item> getItems() {
+        return items;
     }
 }

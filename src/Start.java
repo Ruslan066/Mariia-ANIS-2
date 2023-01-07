@@ -1,3 +1,4 @@
+import shops.Item;
 import shops.Shop;
 import users.DiscountCard;
 import users.Client;
@@ -5,6 +6,7 @@ import users.Employee;
 import users.User;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -213,12 +215,47 @@ public class Start extends ReadWriteData {
             Account();
         }
         try {
-            shops.get(Integer.parseInt(choice)).ShowShopInfoWithItems();
+            shops.get(Integer.parseInt(choice));
+            ShowShop(Integer.parseInt(choice));
         } catch (Exception ex) {
             System.out.println("You type the wrong value: id");
             ChoiceShop();
         }
     }
+
+    private void ShowShop(int id){
+
+        shops.get(id).ShowShopInfo();
+        System.out.println("Your current money: " + logInUser.getMoney());
+        for (Item item : shops.get(id).getItems()) {
+            item.ShowItemInfo();
+        }
+        System.out.println("Type NAME of item and COUNT for buy, example: Peony 1");
+        System.out.println("Type exit to go back:");
+        Scanner in = new Scanner(System.in);
+        String choice = in.nextLine();
+        if(Objects.equals(choice, "exit")){
+            Account();
+        }
+        String[] words = choice.trim().split("\\s+");
+        System.out.println(Arrays.toString(words));
+
+        try {
+            for (Item item : shops.get(id).getItems()) {
+                if (Objects.equals(words[0], item.getName())) {
+                    item.ChangeCount(Integer.parseInt(words[1]));
+                    logInUser.setMoney(item.getCost()*Integer.parseInt(words[1]));
+                }
+            }
+            ShowShop(id);
+        }
+        catch (Exception exception){
+            System.out.println("You type the wrong value: NAME");
+        }
+
+
+    }
+
     private void GoBack(){
         System.out.println("Type exit to go back: ");
         Scanner in = new Scanner(System.in);
