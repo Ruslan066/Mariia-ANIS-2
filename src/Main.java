@@ -50,13 +50,18 @@ public class Main extends Start{
 // патерн "Prototype" клонирования магазина
         ShopFactory factory = new ShopFactory(HappyChappy);
         Shop FlowerCat = factory.CloneShop();
-        Shop AsiaFlower = factory.CloneShop();
+        //Shop AsiaFlower = factory.CloneShop();
         FlowerCat.setNameAddress("FlowerCat", "Hlavna 11");
-        AsiaFlower.setNameAddress("AsiaFlower", "Hlavna 3");
+        //AsiaFlower.setNameAddress("AsiaFlower", "Hlavna 3");
+
+        System.out.println(FlowerCat.getItems().hashCode());
+        System.out.println(HappyChappy.getItems().hashCode());
+        HappyChappy.ShowShopInfoWithItems();
+        FlowerCat.ShowShopInfoWithItems();
 
         shops.add(HappyChappy);
         shops.add(FlowerCat);
-        shops.add(AsiaFlower);
+        //shops.add(AsiaFlower);
 
         WriteShopData(shops);
         System.out.println("Create Shops!!!");

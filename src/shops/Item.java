@@ -2,7 +2,7 @@ package shops;
 
 import java.io.Serializable;
 
-public class Item implements Serializable {
+public class Item implements Copyable, Serializable {
     private int id;
     private String name;
     private int count;
@@ -32,5 +32,11 @@ public class Item implements Serializable {
 
     public double getCost() {
         return cost;
+    }
+
+    @Override
+    public Object copy(int id) {
+        Item item = new Item(id, this.name, this.cost);
+        return item;
     }
 }

@@ -28,9 +28,10 @@ public class Shop implements Copyable, Serializable {
 
     public void ShowShopInfoWithItems() {
         System.out.println(
-                "Name: " + this.name + ", Address: " + this.address + "\n----------");
+                "Name: " + this.name + ", Address: " + this.address );
         for (Item item : items) {
             item.ShowItemInfo();
+            System.out.println(item.hashCode()+ "\n----------");
         }
     }
     public void ShowShopInfo() {
@@ -48,7 +49,14 @@ public class Shop implements Copyable, Serializable {
 
     @Override
     public Object copy(int id) {
-        Shop shop = new Shop(id, this.name, this.address, this.items);
+        ArrayList<Item> new_items = new ArrayList<Item>();
+        for (Item item :
+                items) {
+            new_items.add((Item) item.copy(0));
+        }
+        System.out.println("j: "+new_items.hashCode());
+        new_items =items;
+        Shop shop = new Shop(id, this.name, this.address, new_items);
         return shop;
     }
 
