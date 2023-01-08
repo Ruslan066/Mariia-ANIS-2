@@ -129,7 +129,7 @@ public class Start extends ReadWriteData {
                 UserInfo();
                 break;
             case 2:
-                CreateAccount();
+                ShowMyProducts();
                 break;
             case 3:
                 ShowShops();
@@ -187,16 +187,20 @@ public class Start extends ReadWriteData {
         }
     }
 
+    private void ShowMyProducts(){
+        System.out.println("=-- My Shopping Cart --=");
+        logInUser.getShoppingCart().ShowShoppingCart();
+        GoBack("Account");
+    }
+
     private void ShowShops() {
         System.out.println("=-- Shops --=");
         for (Shop shop : shops) {
             shop.ShowShopInfo();
             System.out.println("----------");
         }
-        if (logInUser != null) {
-            ChoiceShop();
-        }
-        GoBack();
+        ChoiceShop();
+
 
         if (logInUser.isEmployee()) {
             System.out.println("You are users.Employee");
@@ -207,12 +211,16 @@ public class Start extends ReadWriteData {
 
         System.out.println("Good");
     }
-    private void ChoiceShop(){
+
+    private void ChoiceShop() {
         System.out.println("Type id of shop for more detail or type exit to go back: ");
         Scanner in = new Scanner(System.in);
         String choice = in.nextLine();
-        if(Objects.equals(choice, "exit")){
-            Account();
+        if (Objects.equals(choice, "exit")) {
+            if (logInUser != null)
+                Account();
+            else
+                HomePage();
         }
         try {
             shops.get(Integer.parseInt(choice));
@@ -223,51 +231,72 @@ public class Start extends ReadWriteData {
         }
     }
 
-    private void ShowShop(int id){
-
+    private void ShowShop(int id) {
         shops.get(id).ShowShopInfo();
-        System.out.println("Your current money: " + logInUser.getMoney());
+        if (logInUser != null)
+            System.out.println("Your current money: " + logInUser.getMoney());
         for (Item item : shops.get(id).getItems()) {
-            item.ShowItemInfo();
+            item.ShowItemInfo(logInUser.getDiscountPercent());
         }
+        if (logInUser != null)
+            BuyItem(id);
+        GoBack("ShowShops");
+    }
+
+    private void BuyItem(int id) {
         System.out.println("Type NAME of item and COUNT for buy, example: Peony 1");
         System.out.println("Type exit to go back:");
         Scanner in = new Scanner(System.in);
         String choice = in.nextLine();
-        if(Objects.equals(choice, "exit")){
+        if (Objects.equals(choice, "exit")) {
             Account();
         }
         String[] words = choice.trim().split("\\s+");
-        System.out.println(Arrays.toString(words));
 
         try {
             for (Item item : shops.get(id).getItems()) {
                 if (Objects.equals(words[0], item.getName())) {
+                    if (words.length != 2) {
+                        System.out.println("You type the wrong request!");
+                        BuyItem(id);
+                    }
+                    if (item.getCount() < Integer.parseInt(words[1])) {
+                        System.out.println("The amount of product in the store is less than you want to buy!");
+                        BuyItem(id);
+                    }
+                    if (logInUser.getMoney() < item.getCost() * Integer.parseInt(words[1])) {
+                        System.out.println("You don't have enough money to buy!");
+                        BuyItem(id);
+                    }
                     item.ChangeCount(Integer.parseInt(words[1]));
-                    logInUser.setMoney(item.getCost()*Integer.parseInt(words[1]));
+
+                    double costPercent = item.getCost() - (logInUser.getDiscountPercent()/100.0) * item.getCost();
+                    logInUser.setMoney(costPercent * Integer.parseInt(words[1]));
+                    logInUser.AddItemToShoppingCart(item, Integer.parseInt(words[1]));
+                    WriteShopData(shops);
+                    users.set(idUser, logInUser);
+                    WriteUserData(users);
                 }
             }
             ShowShop(id);
-        }
-        catch (Exception exception){
+        } catch (Exception exception) {
+            System.out.println(exception);
             System.out.println("You type the wrong value: NAME");
+            BuyItem(id);
         }
-
-
     }
 
-    private void GoBack(){
+    private void GoBack(String forward) {
         System.out.println("Type exit to go back: ");
         Scanner in = new Scanner(System.in);
         String choice = in.nextLine();
-        if(Objects.equals(choice, "exit")){
-            if (logInUser != null) {
+        if (Objects.equals(choice, "exit")) {
+            if(Objects.equals(forward, "ShowShops"))
+                ShowShops();
+            if(Objects.equals(forward, "Account"))
                 Account();
-            } else {
-                HomePage();
-            }
         }
-        GoBack();
+        GoBack(forward);
     }
 
 

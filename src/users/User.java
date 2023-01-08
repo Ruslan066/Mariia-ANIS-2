@@ -1,5 +1,8 @@
 package users;
 
+import shops.Item;
+import shops.ShoppingCart;
+
 import java.io.Serializable;
 
 public abstract class User implements Serializable {
@@ -22,7 +25,10 @@ public abstract class User implements Serializable {
     public abstract void MakeDeposit(int deposit);
     public abstract void SetDiscountCard(String card);
     public  abstract double getMoney();
+    public  abstract int getDiscountPercent();
+    public  abstract ShoppingCart getShoppingCart();
     public  abstract void setMoney(double money);
+    public abstract void AddItemToShoppingCart(Item item, int count);
 
     public String getLogin() {
         return login;

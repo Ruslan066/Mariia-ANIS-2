@@ -4,12 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ddaf963a-dcfe-4c98-b568-29f5f8ecdb52" name="Changes" comment="commit">
+    <list default="true" id="ddaf963a-dcfe-4c98-b568-29f5f8ecdb52" name="Changes" comment="CreateAccount complete">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shopsData.txt" beforeDir="false" afterPath="$PROJECT_DIR$/shopsData.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ReadWriteData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReadWriteData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Start.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Start.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/shops/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/shops/Item.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/shops/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/shops/Shop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shops/ShoppingCart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/shops/ShoppingCart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/users/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/users/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/users/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/users/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/users/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/users/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usersData.txt" beforeDir="false" afterPath="$PROJECT_DIR$/usersData.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,9 +77,7 @@
       <workItem from="1672229341361" duration="266000" />
       <workItem from="1672229679518" duration="1042000" />
       <workItem from="1672761474312" duration="21379000" />
-      <workItem from="1672844947322" duration="3661000" />
-      <workItem from="1672859452574" duration="5960000" />
-      <workItem from="1672868515621" duration="1191000" />
+      <workItem from="1672844947322" duration="3525000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1672229477430</created>
@@ -95,41 +100,28 @@
       <option name="project" value="LOCAL" />
       <updated>1672790591460</updated>
     </task>
-    <task id="LOCAL-00004" summary="User / Client / Employee - access isEmployee. complete">
-      <created>1672849615291</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1672849615291</updated>
-    </task>
-    <task id="LOCAL-00005" summary="commit ChoiceShop">
-      <created>1673122265952</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1673122265952</updated>
-    </task>
-    <task id="LOCAL-00006" summary="commit">
-      <created>1673125569808</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1673125569808</updated>
-    </task>
-    <option name="localTasksCounter" value="7" />
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="first commit" />
     <MESSAGE value="Login complete" />
     <MESSAGE value="CreateAccount complete" />
-    <MESSAGE value="User / Client / Employee - access isEmployee. complete" />
-    <MESSAGE value="commit ChoiceShop" />
-    <MESSAGE value="commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="CreateAccount complete" />
   </component>
 </project>

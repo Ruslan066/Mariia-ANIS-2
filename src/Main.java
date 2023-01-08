@@ -19,20 +19,21 @@ public class Main extends Start{
     public static void CreateBasicListUsers(){
         ArrayList<User> users = new ArrayList<>();
         users.Client Ruslan = new users.Client("Ruslan", "421951305305", "LuxLux", "123456");
+        users.Client Sam = new users.Client("Sam", "421951305305", "1", "1");
         users.Client Maria = new users.Client("Maria", "421951306306", "MariMari", "001122");
         users.Client Tom = new users.Client("Tom", "421951123123", "KobiKo", "159753");
         users.Employee Daniela = new users.Employee("Daniela", "421951741258", "DELL", "020202");
 
         users.add(Ruslan);
+        users.add(Sam);
         users.add(Maria);
         users.add(Tom);
         users.add(Daniela);
         WriteUserData(users);
         System.out.println("Create Users!!!");
-//        ArrayList<users.User> users2 = ReadUsersData();
+
+//        ArrayList<users.User> users2 = ReadUserData();
 //        users2.get(0).ShowUserInfo();
-//        System.out.println();
-//        users2.get(3).ShowUserInfo();
     }
     public static void CreateBasicListShops(){
         ArrayList<Shop> shops = new ArrayList<>();
@@ -50,18 +51,13 @@ public class Main extends Start{
 // патерн "Prototype" клонирования магазина
         ShopFactory factory = new ShopFactory(HappyChappy);
         Shop FlowerCat = factory.CloneShop();
-        //Shop AsiaFlower = factory.CloneShop();
+        Shop AsiaFlower = factory.CloneShop();
         FlowerCat.setNameAddress("FlowerCat", "Hlavna 11");
-        //AsiaFlower.setNameAddress("AsiaFlower", "Hlavna 3");
-
-        System.out.println(FlowerCat.getItems().hashCode());
-        System.out.println(HappyChappy.getItems().hashCode());
-        HappyChappy.ShowShopInfoWithItems();
-        FlowerCat.ShowShopInfoWithItems();
+        AsiaFlower.setNameAddress("AsiaFlower", "Hlavna 3");
 
         shops.add(HappyChappy);
         shops.add(FlowerCat);
-        //shops.add(AsiaFlower);
+        shops.add(AsiaFlower);
 
         WriteShopData(shops);
         System.out.println("Create Shops!!!");

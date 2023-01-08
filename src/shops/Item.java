@@ -15,10 +15,12 @@ public class Item implements Copyable, Serializable {
         this.count = 10;
     }
 
-    public void ShowItemInfo(){
+    public void ShowItemInfo(int percent){
+        double costPercent = this.cost - (percent/100.0) * this.cost;
+        double newCost = (double) Math.round(costPercent * 100) / 100;
         System.out.println(
                         "Name: " + this.name +
-                        "\nCost: " + this.cost+
+                        "\nCost: " + newCost+
                         "\nCount: " + this.count+
                         "\n----------");
     }
@@ -32,6 +34,14 @@ public class Item implements Copyable, Serializable {
 
     public double getCost() {
         return cost;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public int getCount() {
+        return count;
     }
 
     @Override

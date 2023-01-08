@@ -15,11 +15,11 @@ public class Shop implements Copyable, Serializable {
         this.name = name;
         this.address = address;
     }
-    public Shop(int id, String name, String address, ArrayList<Item> items) {
+    public Shop(int id, String name, String address, ArrayList<Item> itemss) {
         this.id = id;
         this.name = name;
         this.address = address;
-        this.items = items;
+        this.items = itemss;
     }
 
     public void AddItem(Item item) {
@@ -30,7 +30,7 @@ public class Shop implements Copyable, Serializable {
         System.out.println(
                 "Name: " + this.name + ", Address: " + this.address );
         for (Item item : items) {
-            item.ShowItemInfo();
+            item.ShowItemInfo(0);
             System.out.println(item.hashCode()+ "\n----------");
         }
     }
@@ -54,10 +54,7 @@ public class Shop implements Copyable, Serializable {
                 items) {
             new_items.add((Item) item.copy(0));
         }
-        System.out.println("j: "+new_items.hashCode());
-        new_items =items;
-        Shop shop = new Shop(id, this.name, this.address, new_items);
-        return shop;
+        return new Shop(id, this.name, this.address, new_items);
     }
 
     public ArrayList<Item> getItems() {

@@ -1,10 +1,7 @@
 import shops.Shop;
 import users.User;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 
 public class ReadWriteData {
@@ -41,7 +38,7 @@ public class ReadWriteData {
         }
     }
 
-    public ArrayList<User> ReadUserData(){
+    public static ArrayList<User> ReadUserData(){
         ArrayList<User> users = new ArrayList<>();
         try {
             FileInputStream fileStream = new FileInputStream("usersData.txt");

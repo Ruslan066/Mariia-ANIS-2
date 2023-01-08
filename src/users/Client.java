@@ -1,9 +1,15 @@
 package users;
 
-public class Client extends User{
+import shops.Item;
+import shops.ShoppingCart;
+
+import java.text.DecimalFormat;
+
+public class Client extends User {
     private double money;
     private String discountCard;
     private int discountPercent;
+    private final ShoppingCart shoppingCart = ShoppingCart.getInstance("MyCart");
 
     public Client(String name, String phoneNumber, String login, String password) {
         super(name, phoneNumber, login, password, false);
@@ -16,9 +22,25 @@ public class Client extends User{
 
     }
 
+    public int getDiscountPercent() {
+        return discountPercent;
+    }
+
+    @Override
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
+    }
+
+    @Override
+    public void AddItemToShoppingCart(Item item, int count) {
+        shoppingCart.addItem(item, count);
+    }
+
     @Override
     public void setMoney(double money) {
         this.money -= money;
+        this.money = (double) Math.round(this.money * 100) / 100;
+
     }
 
     @Override

@@ -1,5 +1,8 @@
 package users;
 
+import shops.Item;
+import shops.ShoppingCart;
+
 public class Employee extends User{
 
     public Employee(String name, String phoneNumber, String login, String password) {
@@ -17,12 +20,27 @@ public class Employee extends User{
     }
 
     @Override
+    public ShoppingCart getShoppingCart() {
+        return null;
+    }
+
+    @Override
+    public void AddItemToShoppingCart(Item item, int count) {
+
+    }
+
+    @Override
     public void MakeDeposit(int deposit) {
     }
 
     @Override
     public void SetDiscountCard(String card) {
 
+    }
+
+    @Override
+    public int getDiscountPercent() {
+        return 0;
     }
 
     @Override
