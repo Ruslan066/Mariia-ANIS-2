@@ -5,8 +5,8 @@ import shops.ShoppingCart;
 
 public class Employee extends User{
 
-    public Employee(String name, String phoneNumber, String login, String password) {
-        super(name, phoneNumber, login, password, true);
+    public Employee(int id, String name, String phoneNumber, String login, String password) {
+        super(id, name, phoneNumber, login, password, true);
     }
 
     @Override

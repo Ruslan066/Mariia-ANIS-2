@@ -6,13 +6,14 @@ import shops.ShoppingCart;
 import java.io.Serializable;
 
 public abstract class User implements Serializable {
+    private int id;
     private String name;
     private String phoneNumber;
     private String login;
     private String password;
     private boolean isEmployee;
 
-    public User(String name, String phoneNumber, String login, String password, boolean isEmployee) {
+    public User(int id, String name, String phoneNumber, String login, String password, boolean isEmployee) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.login = login;

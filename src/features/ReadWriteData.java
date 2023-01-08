@@ -1,3 +1,5 @@
+package features;
+
 import shops.Shop;
 import users.User;
 
@@ -6,7 +8,7 @@ import java.util.ArrayList;
 
 public class ReadWriteData {
 
-    public static void WriteUserData(ArrayList<User> users){
+    public void WriteUserData(ArrayList<User> users){
         try {
             FileOutputStream file = new FileOutputStream("usersData.txt");
 
@@ -22,7 +24,7 @@ public class ReadWriteData {
         }
     }
 
-    public static void WriteShopData(ArrayList<Shop> shops){
+    public void WriteShopData(ArrayList<Shop> shops){
         try {
             FileOutputStream file = new FileOutputStream("shopsData.txt");
 

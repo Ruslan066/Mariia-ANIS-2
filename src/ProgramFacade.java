@@ -1,27 +1,28 @@
+import features.ReadWriteData;
 import shops.Item;
 import shops.Shop;
-import users.DiscountCard;
-import users.Client;
-import users.Employee;
-import users.User;
+import shops.ShopFactory;
+import users.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class Start extends ReadWriteData {
+public class ProgramFacade extends ReadWriteData {
 
     private User logInUser;
     private ArrayList<User> users;
     private ArrayList<Shop> shops;
     private int idUser;
+    private final UserFeatures userFeatures;
 
-    public Start() {
-        HomePage();
+    public ProgramFacade(User logInUser) {
+        this.logInUser = logInUser;
+        this.users = ReadUserData();
+        userFeatures = new UserFeatures(this.users);
     }
 
-    private void HomePage() {
+    public void HomePage() {
         shops = ReadShopData();
         System.out.println("=-- Welcome --=");
         System.out.println("1: LogIn");
@@ -32,10 +33,12 @@ public class Start extends ReadWriteData {
         int choice = in.nextInt();
         switch (choice) {
             case 1:
-                LogIn();
+                logInUser = userFeatures.LogIn();
+                Account();
                 break;
             case 2:
-                CreateAccount();
+                logInUser = userFeatures.CreateNewUser();
+                Account();
                 break;
             case 3:
                 ShowShops();
@@ -47,73 +50,6 @@ public class Start extends ReadWriteData {
                 HomePage();
                 break;
         }
-    }
-
-    private void LogIn() {
-        users = ReadUserData();
-
-        //users.get(0).ShowUserInfo();
-        Scanner in = new Scanner(System.in);
-        boolean log = false;
-        boolean pass = false;
-
-        System.out.println("=-- LogIn --=");
-        System.out.println("Enter your login: ");
-        String login = in.nextLine();
-        System.out.println("Enter your password: ");
-        String password = in.nextLine();
-        int i = 0;
-        for (User user : users) {
-            log = Objects.equals(login, user.getLogin());
-            pass = Objects.equals(password, user.getPassword());
-            if (log && pass) {
-                this.logInUser = user;
-                idUser = i;
-                break;
-            }
-            i++;
-        }
-        if (log && pass) {
-            System.out.println("Access good");
-            Account();
-        } else {
-            System.out.println("Incorrect login or password");
-            LogIn();
-        }
-
-    }
-
-    private void CreateAccount() {
-        users = ReadUserData();
-        Scanner in = new Scanner(System.in);
-
-        System.out.println("=-- Create Account --=");
-        System.out.println("Enter your name: ");
-        String name = in.nextLine();
-        System.out.println("Enter your phone number: ");
-        String phoneNumber = in.nextLine();
-        System.out.println("Enter your login: ");
-        String login = in.nextLine();
-        System.out.println("Enter your password: ");
-        String password = in.nextLine();
-        System.out.println("Are you employee: true or false");
-        String isEmployee = in.nextLine();
-        if (Objects.equals(isEmployee, "false")) {
-            Client newUser = new Client(name, phoneNumber, login, password);
-            users.add(newUser);
-            idUser = users.size() - 1;
-            logInUser = users.get(idUser);
-        } else if (Objects.equals(isEmployee, "true")) {
-            Employee newUser = new Employee(name, phoneNumber, login, password);
-            users.add(newUser);
-            idUser = users.size() - 1;
-            logInUser = users.get(idUser);
-        } else {
-            System.out.println("You type the wrong value: true or false");
-            CreateAccount();
-        }
-        WriteUserData(users);
-        Account();
     }
 
     private void Account() {
@@ -129,7 +65,8 @@ public class Start extends ReadWriteData {
                 UserInfo();
                 break;
             case 2:
-                ShowMyProducts();
+                userFeatures.ShowMyProducts();
+                GoBack("Account");
                 break;
             case 3:
                 ShowShops();
@@ -187,12 +124,6 @@ public class Start extends ReadWriteData {
         }
     }
 
-    private void ShowMyProducts(){
-        System.out.println("=-- My Shopping Cart --=");
-        logInUser.getShoppingCart().ShowShoppingCart();
-        GoBack("Account");
-    }
-
     private void ShowShops() {
         System.out.println("=-- Shops --=");
         for (Shop shop : shops) {
@@ -223,7 +154,6 @@ public class Start extends ReadWriteData {
                 HomePage();
         }
         try {
-            shops.get(Integer.parseInt(choice));
             ShowShop(Integer.parseInt(choice));
         } catch (Exception ex) {
             System.out.println("You type the wrong value: id");
@@ -232,11 +162,15 @@ public class Start extends ReadWriteData {
     }
 
     private void ShowShop(int id) {
+        int percent = 0;
+
         shops.get(id).ShowShopInfo();
-        if (logInUser != null)
+        if (logInUser != null) {
             System.out.println("Your current money: " + logInUser.getMoney());
+            percent = logInUser.getDiscountPercent();
+        }
         for (Item item : shops.get(id).getItems()) {
-            item.ShowItemInfo(logInUser.getDiscountPercent());
+            item.ShowItemInfo(percent);
         }
         if (logInUser != null)
             BuyItem(id);
@@ -270,7 +204,7 @@ public class Start extends ReadWriteData {
                     }
                     item.ChangeCount(Integer.parseInt(words[1]));
 
-                    double costPercent = item.getCost() - (logInUser.getDiscountPercent()/100.0) * item.getCost();
+                    double costPercent = item.getCost() - (logInUser.getDiscountPercent() / 100.0) * item.getCost();
                     logInUser.setMoney(costPercent * Integer.parseInt(words[1]));
                     logInUser.AddItemToShoppingCart(item, Integer.parseInt(words[1]));
                     WriteShopData(shops);
@@ -291,13 +225,57 @@ public class Start extends ReadWriteData {
         Scanner in = new Scanner(System.in);
         String choice = in.nextLine();
         if (Objects.equals(choice, "exit")) {
-            if(Objects.equals(forward, "ShowShops"))
+            if (Objects.equals(forward, "ShowShops"))
                 ShowShops();
-            if(Objects.equals(forward, "Account"))
+            if (Objects.equals(forward, "Account"))
                 Account();
         }
         GoBack(forward);
     }
 
+    public void CreateBasicListUsers() {
+        ArrayList<User> users = new ArrayList<>();
+        users.Client Ruslan = new users.Client(0, "Ruslan", "421951305305", "LuxLux", "123456");
+        users.Client Sam = new users.Client(1, "Sam", "421951305305", "1", "1");
+        users.Client Maria = new users.Client(2, "Maria", "421951306306", "MariMari", "001122");
+        users.Client Tom = new users.Client(3, "Tom", "421951123123", "KobiKo", "159753");
+        users.Employee Daniela = new users.Employee(4, "Daniela", "421951741258", "DELL", "020202");
+
+        users.add(Ruslan);
+        users.add(Sam);
+        users.add(Maria);
+        users.add(Tom);
+        users.add(Daniela);
+        WriteUserData(users);
+        System.out.println("Create Users!!!");
+    }
+
+    public void CreateBasicListShops() {
+        ArrayList<Shop> shops = new ArrayList<>();
+        Item Peony = new Item(0, "Peony", 3);
+        Item Rose = new Item(1, "Rose", 5.5);
+        Item Fir = new Item(2, "Fir", 15);
+        Item Cactus = new Item(3, "Cactus", 7.98);
+
+        Shop HappyChappy = new Shop(0, "HappyChappy", "Kosice Jedlikova 9");
+        HappyChappy.AddItem(Peony);
+        HappyChappy.AddItem(Rose);
+        HappyChappy.AddItem(Fir);
+        HappyChappy.AddItem(Cactus);
+
+// патерн "Prototype" клонирования магазина
+        ShopFactory factory = new ShopFactory(HappyChappy);
+        Shop FlowerCat = factory.CloneShop();
+        Shop AsiaFlower = factory.CloneShop();
+        FlowerCat.setNameAddress("FlowerCat", "Hlavna 11");
+        AsiaFlower.setNameAddress("AsiaFlower", "Hlavna 3");
+
+        shops.add(HappyChappy);
+        shops.add(FlowerCat);
+        shops.add(AsiaFlower);
+
+        WriteShopData(shops);
+        System.out.println("Create Shops!!!");
+    }
 
 }

@@ -11,8 +11,8 @@ public class Client extends User {
     private int discountPercent;
     private final ShoppingCart shoppingCart = ShoppingCart.getInstance("MyCart");
 
-    public Client(String name, String phoneNumber, String login, String password) {
-        super(name, phoneNumber, login, password, false);
+    public Client(int id, String name, String phoneNumber, String login, String password) {
+        super(id, name, phoneNumber, login, password, false);
         this.money = 100;
         this.discountCard = DiscountCard.NO_CARD.toString();
         this.discountPercent = DiscountCard.valueOf(discountCard).ordinal();
