@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public final class ShoppingCart implements Serializable {
     private static ShoppingCart instance;
-    public String name;
+    public final String name;
     ArrayList<Item> items = new ArrayList<Item>();
 
     private ShoppingCart(String name){

@@ -1,50 +1,38 @@
 package users;
 
-import shops.Item;
-import shops.ShoppingCart;
-
 import java.io.Serializable;
 
 public abstract class User implements Serializable {
-    private int id;
-    private String name;
-    private String phoneNumber;
-    private String login;
-    private String password;
-    private boolean isEmployee;
+    private final int id;
+    private final String name;
+    private final String phoneNumber;
+    private final String login;
+    private final String password;
+    private final boolean isEmployee;
 
     public User(int id, String name, String phoneNumber, String login, String password, boolean isEmployee) {
+        this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.login = login;
         this.password = password;
         this.isEmployee = isEmployee;
     }
-    public User() {}
 
     public abstract void ShowUserInfo();
-    public abstract void MakeDeposit(int deposit);
-    public abstract void SetDiscountCard(String card);
-    public  abstract double getMoney();
-    public  abstract int getDiscountPercent();
-    public  abstract ShoppingCart getShoppingCart();
-    public  abstract void setMoney(double money);
-    public abstract void AddItemToShoppingCart(Item item, int count);
 
+    //Getter
+    public int getId() { return id; }
     public String getLogin() {
         return login;
     }
-
     public String getName() { return name; }
-
     public String getPhoneNumber() {
         return phoneNumber;
     }
-
     public String getPassword() {
         return password;
     }
-
     public boolean isEmployee() {
         return isEmployee;
     }

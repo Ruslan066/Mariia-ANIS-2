@@ -1,9 +1,6 @@
 package users;
-
 import shops.Item;
 import shops.ShoppingCart;
-
-import java.text.DecimalFormat;
 
 public class Client extends User {
     private double money;
@@ -18,65 +15,54 @@ public class Client extends User {
         this.discountPercent = DiscountCard.valueOf(discountCard).ordinal();
     }
 
-    public Client(){
-
-    }
-
-    public int getDiscountPercent() {
-        return discountPercent;
-    }
-
-    @Override
-    public ShoppingCart getShoppingCart() {
-        return shoppingCart;
-    }
-
-    @Override
     public void AddItemToShoppingCart(Item item, int count) {
         shoppingCart.addItem(item, count);
     }
 
-    @Override
     public void setMoney(double money) {
         this.money -= money;
         this.money = (double) Math.round(this.money * 100) / 100;
 
     }
-
-    @Override
-    public double getMoney() {
-        return money;
-    }
-
-    @Override
-    public void ShowUserInfo() {
-            System.out.println(
-                    "=-- Client info --="+
-                    "\nName: " + super.getName() +
-                    "\nPhone: " + super.getPhoneNumber() +
-                    "\nLogin: " + super.getLogin() +
-                    "\nPassword: " + super.getPassword() +
-                    "\nMoney: " + this.money+
-                    "\nDiscount Card: " + this.discountCard+
-                    " - " + this.discountPercent+ "%"+
-                    "\nisEmployee: " + super.isEmployee());
-    }
-
-    @Override
-    public void MakeDeposit(int deposit) {
+    public void MakeDeposit(double deposit) {
         this.money += deposit;
     }
 
-    @Override
     public void SetDiscountCard(String card) {
         for (DiscountCard dc : DiscountCard.values()) {
             if (dc.name().equals(card)) {
                 this.discountCard = card;
                 this.discountPercent = DiscountCard.valueOf(discountCard).percent;
-            }
-            else {
+            } else {
                 //System.out.println("Cant find card!");
             }
         }
     }
+
+    //From Class User
+    @Override
+    public void ShowUserInfo() {
+        System.out.println(
+                "=-- Client info --=" +
+                        "\nName: " + super.getName() +
+                        "\nPhone: " + super.getPhoneNumber() +
+                        "\nLogin: " + super.getLogin() +
+                        "\nPassword: " + super.getPassword() +
+                        "\nMoney: " + this.money +
+                        "\nDiscount Card: " + this.discountCard +
+                        " - " + this.discountPercent + "%" +
+                        "\nisEmployee: " + super.isEmployee());
+    }
+
+    //Getter
+    public int getDiscountPercent() {
+        return discountPercent;
+    }
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
+    }
+    public double getMoney() {
+        return money;
+    }
+
 }
