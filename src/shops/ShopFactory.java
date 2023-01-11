@@ -2,13 +2,15 @@ package shops;
 
 public class ShopFactory {
     Shop shop;
-    int id =0;
+    int id;
 
     public ShopFactory(Shop shop) {
         this.shop = shop;
+        this.id = shop.getId();
     }
     public void SetShop(Shop shop) {
         this.shop = shop;
+        this.id = shop.getId();
     }
     public Shop CloneShop(){
         id++;

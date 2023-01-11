@@ -1,5 +1,7 @@
 package shops;
 
+import features.Color;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -34,12 +36,16 @@ public class Shop implements Copyable, Serializable {
             System.out.println(item.hashCode()+ "\n----------");
         }
     }
-    public void ShowShopInfo() {
 
+    public int getId() {
+        return id;
+    }
+
+    public void ShowShopInfo() {
         System.out.println(
-                "id: " + this.id +
-                ", Name: " + this.name +
-                ", Address: " + this.address);
+                set("CYAN") +"id: " +set("RESET") + this.id +
+                set("CYAN") +" Name: " +set("RESET")+ this.name +
+                set("CYAN") +" Address: " +set("RESET")+ this.address);
     }
 
     public void setNameAddress(String name, String address) {
@@ -56,6 +62,17 @@ public class Shop implements Copyable, Serializable {
         }
         return new Shop(id, this.name, this.address, new_items);
     }
+    /**
+     * COMPLETE
+     * This method gets the name of the color and returns his code.
+     *
+     * @param color - name color. Example (RED, BLUE, RESET)
+     * @return code color. Example "\u001B[0m"
+     */
+    private String set(String color) {
+        return Color.valueOf(color).colorCode;
+    }
+
 
     public ArrayList<Item> getItems() {
         return items;

@@ -28,10 +28,10 @@ public class ProgramFacade extends ReadWriteData {
     public void displayHomePage() {
         shops = ReadShopData();
         System.out.println(set("YELLOW") + "=--" + set("PURPLE") + " Welcome " + set("YELLOW") + "--=");
-        System.out.println(set("BLUE") + "1:" + set("RESET") + " LogIn");
-        System.out.println(set("BLUE") + "2:" + set("RESET") + " Create account");
-        System.out.println(set("BLUE") + "3:" + set("RESET") + " View information about the store and the range of products");
-        System.out.println(set("BLUE") + "4:" + set("RESET") + " Exit");
+        System.out.println(set("BLUE") + "1" + set("RESET") + ": LogIn");
+        System.out.println(set("BLUE") + "2" + set("RESET") + ": Create account");
+        System.out.println(set("BLUE") + "3" + set("RESET") + ": View information about the store and the range of products");
+        System.out.println(set("BLUE") + "4" + set("RESET") + ": Exit");
         int choice = myScanner();
         switch (choice) {
             case 1 -> {
@@ -45,7 +45,9 @@ public class ProgramFacade extends ReadWriteData {
             case 3 -> displayShopsPage();
             case 4 -> System.exit(0);
             default -> {
-                System.out.println(set("RED") + "Please enter a number 1 - 4!" + set("RESET"));
+                System.out.println(set("RED") + "Please enter a number "+
+                        set("BLUE")+"1 - 4"+
+                        set("RED")+"!" + set("RESET"));
                 displayHomePage();
             }
         }
@@ -58,13 +60,13 @@ public class ProgramFacade extends ReadWriteData {
      */
     private void displayAccountPage() {
         System.out.println(set("YELLOW") + "=--" + set("PURPLE") + " Welcome " + set("GREEN") + logInUser.getName() + set("YELLOW") + " --=");
-        System.out.println(set("BLUE") + "1:" + set("RESET") + " View info about my account");
-        System.out.println(set("BLUE") + "2:" + set("RESET") + " Choose a store");
+        System.out.println(set("BLUE") + "1" + set("RESET") + ": View info about my account");
+        System.out.println(set("BLUE") + "2" + set("RESET") + ": Choose a store");
         if (logInUser.isEmployee()) {
-            System.out.println(set("BLUE") + "3:" + set("RESET") + " Exit");
+            System.out.println(set("BLUE") + "3" + set("RESET") + ": Exit");
         } else {
-            System.out.println(set("BLUE") + "3:" + set("RESET") + " View the list of purchased products");
-            System.out.println(set("BLUE") + "4:" + set("RESET") + " Exit");
+            System.out.println(set("BLUE") + "3" + set("RESET") + ": View the list of purchased products");
+            System.out.println(set("BLUE") + "4" + set("RESET") + ": Exit");
         }
 
         int choice;
@@ -73,11 +75,15 @@ public class ProgramFacade extends ReadWriteData {
             choice = myScanner();
             flag = false;
             if (logInUser.isEmployee() && (choice > 3 || choice < 1)) {
-                System.out.println(set("RED") + "Please enter a number 1 - 3!" + set("RESET"));
+                System.out.println(set("RED") + "Please enter a number "+
+                        set("BLUE")+"1 - 3"+
+                        set("RED")+"!" + set("RESET"));
                 flag = true;
             }
             if (!logInUser.isEmployee() && (choice > 4 || choice < 1)) {
-                System.out.println(set("RED") + "Please enter a number 1 - 4!" + set("RESET"));
+                System.out.println(set("RED") + "Please enter a number "+
+                        set("BLUE")+"1 - 4"+
+                        set("RED")+"!" + set("RESET"));
                 flag = true;
             }
         } while (flag);
@@ -110,9 +116,9 @@ public class ProgramFacade extends ReadWriteData {
         if (logInUser.isEmployee())
             goBack("AccountPage");
 
-        System.out.println(set("BLUE") + "1:" + set("RESET") + " Top up your account");
-        System.out.println(set("BLUE") + "2:" + set("RESET") + " Choose a discount card");
-        System.out.println(set("BLUE") + "3:" + set("RESET") + " Exit");
+        System.out.println(set("BLUE") + "1" + set("RESET") + ": Top up your account");
+        System.out.println(set("BLUE") + "2" + set("RESET") + ": Choose a discount card");
+        System.out.println(set("BLUE") + "3" + set("RESET") + ": Exit");
 
         int choice;
         boolean flag;
@@ -120,7 +126,9 @@ public class ProgramFacade extends ReadWriteData {
             choice = myScanner();
             flag = false;
             if (choice > 3 || choice < 1) {
-                System.out.println(set("RED") + "Please enter a number 1 - 3!" + set("RESET"));
+                System.out.println(set("RED") + "Please enter a number "+
+                        set("BLUE")+"1 - 3"+
+                        set("RED")+"!" + set("RESET"));
                 flag = true;
             }
         } while (flag);
@@ -139,31 +147,36 @@ public class ProgramFacade extends ReadWriteData {
         }
     }
 
+    /**
+     * COMPLETE
+     * This method displays a page with a list of all shops
+     * and information about them.
+     */
     private void displayShopsPage() {
-        System.out.println(set("YELLOW") + "=--" + set("PURPLE") +" Shops "+set("YELLOW") + "--=");
+        System.out.println(set("YELLOW") + "=--" + set("PURPLE") +" Shops "+set("YELLOW") + "--="+ set("RESET"));
         for (Shop shop : shops) {
             shop.ShowShopInfo();
-            System.out.println("----------");
+            System.out.println(set("YELLOW") +"----------"+ set("RESET"));
         }
-        choiceShop();
-    }
-
-    private void choiceShop() {
-        System.out.println("Type id of shop for more detail or type exit to go back: ");
-        Scanner in = new Scanner(System.in);
-        String choice = in.nextLine();
-        if (Objects.equals(choice, "exit")) {
-            if (logInUser != null)
-                displayAccountPage();
-            else
-                displayHomePage();
-        }
-        try {
-            displayShopPage(Integer.parseInt(choice));
-        } catch (Exception ex) {
-            System.out.println("You type the wrong value: id");
-            choiceShop();
-        }
+        System.out.println("Type "+set("BLUE")+"id"+set("RESET")+" of shop for more detail or type "+set("BLUE")+"0"+set("RESET")+" to go back: ");
+        int choice;
+        boolean flag;
+        do {
+            choice = myScanner();
+            if(choice == 0)
+                if(logInUser == null)
+                    displayHomePage();
+                else
+                    displayAccountPage();
+            flag = false;
+            if (choice > shops.size() || choice < 0) {
+                System.out.println(set("RED") + "Please enter a number "+
+                        set("BLUE")+"0 - "+ shops.size()+
+                        set("RED")+"!" + set("RESET"));
+                flag = true;
+            }
+        } while (flag);
+        displayShopPage(choice-1);
     }
 
     private void displayShopPage(int id) {
@@ -273,7 +286,7 @@ public class ProgramFacade extends ReadWriteData {
         Item Fir = new Item(2, "Fir", 15);
         Item Cactus = new Item(3, "Cactus", 7.98);
 
-        Shop HappyChappy = new Shop(0, "HappyChappy", "Kosice Jedlikova 9");
+        Shop HappyChappy = new Shop(1, "HappyChappy", "Kosice Jedlikova 9");
         HappyChappy.AddItem(Peony);
         HappyChappy.AddItem(Rose);
         HappyChappy.AddItem(Fir);
