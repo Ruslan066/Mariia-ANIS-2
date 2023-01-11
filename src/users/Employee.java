@@ -10,8 +10,8 @@ public class Employee extends User {
     @Override
     public void ShowUserInfo() {
         System.out.println(
-                "=-- Employee info --=" +
-                "\nName: " + super.getName() +
+                set("YELLOW") + "=--" + set("PURPLE") +" Employee "+ set("GREEN") + "info" + set("YELLOW") + " --=" +
+                        "\nName: " + super.getName() +
                 "\nPhone: " + super.getPhoneNumber() +
                 "\nLogin: " + super.getLogin() +
                 "\nPassword: " + super.getPassword() +

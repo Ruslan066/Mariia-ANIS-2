@@ -14,8 +14,8 @@ public class UserFeatures extends ReadWriteData {
     private Client logInClient = null;
     private Employee logInEmployee = null;
 
-    public UserFeatures(ArrayList<User> users) {
-        this.users = users;
+    public UserFeatures() {
+        this.users = ReadUserData();
     }
 
     //Complete

@@ -43,15 +43,15 @@ public class Client extends User {
     @Override
     public void ShowUserInfo() {
         System.out.println(
-                "=-- Client info --=" +
-                        "\nName: " + super.getName() +
-                        "\nPhone: " + super.getPhoneNumber() +
-                        "\nLogin: " + super.getLogin() +
-                        "\nPassword: " + super.getPassword() +
-                        "\nMoney: " + this.money +
-                        "\nDiscount Card: " + this.discountCard +
+                set("YELLOW") + "=--" + set("PURPLE") +" Client "+ set("GREEN") + "info" + set("YELLOW") + " --=" +
+                        set("CYAN") +"\nName: " + set("RESET") + super.getName() +
+                        set("CYAN") +"\nPhone: " + set("RESET")+ super.getPhoneNumber() +
+                        set("CYAN") +"\nLogin: " + set("RESET")+ super.getLogin() +
+                        set("CYAN") +"\nPassword: " + set("RESET")+ super.getPassword() +
+                        set("CYAN") +"\nMoney: " + set("RESET")+ this.money +
+                        set("CYAN") +"\nDiscount Card: " + set("RESET")+ this.discountCard +
                         " - " + this.discountPercent + "%" +
-                        "\nisEmployee: " + super.isEmployee());
+                        set("CYAN") +"\nisEmployee: " + set("RESET")+ super.isEmployee());
     }
 
     //Getter

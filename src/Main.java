@@ -1,12 +1,12 @@
 public class Main{
     public static void main(String[] args) {
 
-        ProgramFacade programFacade = new ProgramFacade(null);
+        ProgramFacade programFacade = new ProgramFacade();
         // USER
-        programFacade.CreateBasicListUsers();
+        programFacade.createBasicListUsers();
         // SHOP ITEM
-        programFacade.CreateBasicListShops();
+        programFacade.createBasicListShops();
 
-        programFacade.HomePage();
+        programFacade.displayHomePage();
     }
 }

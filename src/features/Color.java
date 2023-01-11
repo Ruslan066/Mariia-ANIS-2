@@ -10,7 +10,7 @@ public enum Color {
     PURPLE("\u001B[35m"),
     CYAN("\u001B[36m"),
     WHITE("\u001B[37m");
-    public String colorCode;
+    public final String colorCode;
 
     Color(String colorCode) {
         this.colorCode = colorCode;
