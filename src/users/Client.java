@@ -28,15 +28,16 @@ public class Client extends User {
         this.money += deposit;
     }
 
-    public void SetDiscountCard(String card) {
+    public boolean SetDiscountCard(String card) {
         for (DiscountCard dc : DiscountCard.values()) {
             if (dc.name().equals(card)) {
                 this.discountCard = card;
                 this.discountPercent = DiscountCard.valueOf(discountCard).percent;
-            } else {
-                //System.out.println("Cant find card!");
+                return true;
             }
         }
+        System.out.print(set("RED") +"Discount card not found!!!");
+        return false;
     }
 
     //From Class User

@@ -1,7 +1,6 @@
 package users;
 
-import features.Color;
-import features.ReadWriteData;
+import features.Feature;
 import shops.Item;
 import shops.Shop;
 
@@ -9,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class UserFeatures extends ReadWriteData {
+public class UserFeatures extends Feature {
     private final ArrayList<User> users;
     private User logInUser = null;
     private Client logInClient = null;
@@ -19,13 +18,18 @@ public class UserFeatures extends ReadWriteData {
         this.users = ReadUserData();
     }
 
-    //Complete
+    /**
+     * COMPLETE
+     * This method displays the account login page.
+     *
+     * @return - logInUser, User object
+     */
     public User LogIn() {
         Scanner in = new Scanner(System.in);
         boolean log = false;
         boolean pass = false;
 
-        System.out.println("=-- LogIn --=");
+        System.out.println(set("YELLOW") + "=--" + set("PURPLE") + " LogIn " + set("YELLOW") + "--=" + set("RESET"));
         System.out.println("Enter your login: ");
         String login = in.nextLine();
         System.out.println("Enter your password: ");
@@ -39,25 +43,30 @@ public class UserFeatures extends ReadWriteData {
             }
         }
         if (log && pass) {
-            System.out.println("Access good");
             if (logInUser.isEmployee()) {
                 logInEmployee = (Employee) logInUser;
             } else {
                 logInClient = (Client) logInUser;
             }
         } else {
-            System.out.println("Incorrect login or password");
+            System.out.println(set("RED") + "Incorrect login or password" + set("RESET"));
             LogIn();
         }
         return logInUser;
     }
 
+    /**
+     * COMPLETE
+     * This method displays the account creation page.
+     *
+     * @return - logInUser, User object
+     */
     public User CreateNewUser() {
 
         int id = users.size();
         Scanner in = new Scanner(System.in);
 
-        System.out.println("=-- Create Account --=" + id);
+        System.out.println(set("YELLOW") + "=--" + set("PURPLE") + " Create Account " + set("YELLOW") + "--=" + set("RESET"));
         System.out.println("Enter your name: ");
         String name = in.nextLine();
         System.out.println("Enter your phone number: ");
@@ -66,7 +75,8 @@ public class UserFeatures extends ReadWriteData {
         String login = in.nextLine();
         System.out.println("Enter your password: ");
         String password = in.nextLine();
-        System.out.println("Are you employee: true or false");
+        System.out.println("Are you employee: " + set("BLUE") + "true" +
+                set("RESET") + " or " + set("BLUE") + "false");
         String isEmployee = in.nextLine();
         if (Objects.equals(isEmployee, "false")) {
             Client newUser = new Client(id, name, phoneNumber, login, password);
@@ -77,74 +87,103 @@ public class UserFeatures extends ReadWriteData {
             users.add(newUser);
             logInUser = users.get(id);
         } else {
-            System.out.println("You type the wrong value: true or false");
+            System.out.println(set("RED") + "You type the wrong value: " + set("BLUE") + "true" +
+                    set("RED") + " or " + set("BLUE") + "false" + set("RESET"));
             CreateNewUser();
         }
         WriteUserData(users);
         return logInUser;
     }
 
-    //Client
+    /**
+     * COMPLETE
+     * This method displays the page with the items that the user bought
+     */
     public void ShowMyProducts() {
-        System.out.println("=-- My Shopping Cart --=");
+        System.out.println(set("YELLOW") + "=--" + set("PURPLE") + " My Shopping Cart " + set("YELLOW") + "--=" + set("RESET"));
         logInClient.getShoppingCart().ShowShoppingCart();
-
     }
 
-    //Client
+    /**
+     * COMPLETE
+     * This method displays the top-up page
+     */
     public void TopUpAccount() {
-        System.out.println("=-- Top up account --=");
+        System.out.println(set("YELLOW") + "=--" + set("PURPLE") + " Top up account " + set("YELLOW") + "--=" + set("RESET"));
         System.out.println("Deposit amount:");
-        Scanner in = new Scanner(System.in);
-        int amount = in.nextInt();
+        int amount = myScanner();
         logInClient.MakeDeposit(amount);
         users.set(logInClient.getId(), logInClient);
         WriteUserData(users);
     }
 
-    //Client
+    /**
+     * COMPLETE
+     * This method allows the user to select a discount card
+     */
     public void ChooseDiscountCard() {
-        System.out.println("=-- Choose a discount card --=");
+        boolean flag = true;
+        System.out.println(set("YELLOW") + "=--" + set("PURPLE") + " Choose a discount card " + set("YELLOW") + "--=" + set("RESET"));
 
-        System.out.print("Discount card: ");
+        System.out.print(set("CYAN") + "Discount card: ");
         for (DiscountCard card : DiscountCard.values()) {
-            System.out.print(card + ", ");
+            System.out.print(set("BLUE") + card + set("RESET") + ", ");
         }
-        System.out.println();
-        Scanner in = new Scanner(System.in);
-        String card = in.nextLine();
+        do {
+            System.out.println();
+            Scanner in = new Scanner(System.in);
+            String card = in.nextLine();
 
-        logInClient.SetDiscountCard(card);
-
+            flag = !logInClient.SetDiscountCard(card);
+        } while (flag);
         users.set(logInClient.getId(), logInClient);
         WriteUserData(users);
     }
 
-    //Client
-    public int retPercent(){
+    /**
+     * COMPLETE
+     * This method returns what % the user has to buy the product
+     *
+     * @return - Discount Percent
+     */
+    public int retPercent() {
         return logInClient.getDiscountPercent();
     }
-    //Client
-    public double retMoney(){
+
+    /**
+     * COMPLETE
+     * This method returns how much money the user has in his account
+     *
+     * @return - Money
+     */
+    public double retMoney() {
         return logInClient.getMoney();
     }
-    //Client
-    public boolean BuyItem(String choice, int id, ArrayList<Shop> shops) {
+
+    /**
+     * COMPLETE
+     * This method allows us to buy products in stores
+     *
+     * @param choice - string name and count. Example (Peony 1)
+     * @param shop   - store from the list of stores in which we will buy goods
+     * @return - true: if successfully bought the product. false - If not bought
+     */
+    public boolean BuyItem(String choice, Shop shop) {
 
         String[] words = choice.trim().split("\\s+");
         try {
-            for (Item item : shops.get(id).getItems()) {
+            for (Item item : shop.getItems()) {
                 if (Objects.equals(words[0], item.getName())) {
                     if (words.length != 2) {
-                        System.out.println(set("RED") +"You type the wrong request!"+set("RESET"));
+                        System.out.println(set("RED") + "You type the wrong request!" + set("RESET"));
                         return false;
                     }
                     if (item.getCount() < Integer.parseInt(words[1])) {
-                        System.out.println(set("RED") +"The amount of product in the store is less than you want to buy!"+set("RESET"));
+                        System.out.println(set("RED") + "The amount of product in the store is less than you want to buy!" + set("RESET"));
                         return false;
                     }
                     if (logInClient.getMoney() < item.getCost() * Integer.parseInt(words[1])) {
-                        System.out.println(set("RED") +"You don't have enough money to buy!"+set("RESET"));
+                        System.out.println(set("RED") + "You don't have enough money to buy!" + set("RESET"));
                         return false;
                     }
                     item.ChangeCount(Integer.parseInt(words[1]));
@@ -152,7 +191,7 @@ public class UserFeatures extends ReadWriteData {
                     double costPercent = item.getCost() - (logInClient.getDiscountPercent() / 100.0) * item.getCost();
                     logInClient.setMoney(costPercent * Integer.parseInt(words[1]));
                     logInClient.AddItemToShoppingCart(item, Integer.parseInt(words[1]));
-                    WriteShopData(shops);
+
                     users.set(logInClient.getId(), logInClient);
                     WriteUserData(users);
                     return true;
@@ -165,14 +204,5 @@ public class UserFeatures extends ReadWriteData {
         }
         return false;
     }
-    /**
-     * COMPLETE
-     * This method gets the name of the color and returns his code.
-     *
-     * @param color - name color. Example (RED, BLUE, RESET)
-     * @return code color. Example "\u001B[0m"
-     */
-    private String set(String color) {
-        return Color.valueOf(color).colorCode;
-    }
+
 }

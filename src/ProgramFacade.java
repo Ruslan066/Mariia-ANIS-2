@@ -1,10 +1,6 @@
-import features.Color;
-import features.ReadWriteData;
+import features.Feature;
 import shops.Item;
 import shops.Shop;
-import shops.ShopFactory;
-import users.Client;
-import users.Employee;
 import users.User;
 import users.UserFeatures;
 
@@ -12,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class ProgramFacade extends ReadWriteData {
+public class ProgramFacade extends Feature {
 
     private User logInUser;
     private ArrayList<Shop> shops;
@@ -183,6 +179,7 @@ public class ProgramFacade extends ReadWriteData {
      * COMPLETE
      * This method displays the page with the selected store.
      * If the user is logged into the account he has the possibility to buy the product
+     *
      * @param id - store number in the array (shops)
      */
     private void displayShopPage(int id) {
@@ -191,8 +188,8 @@ public class ProgramFacade extends ReadWriteData {
         System.out.println(set("YELLOW") + "=--" + set("PURPLE") + " Shop " + set("GREEN") +
                 shops.get(id).getName() + set("YELLOW") + " --=");
         System.out.println(set("CYAN") + "id: " + set("RESET") + shops.get(id).getId() +
-                set("CYAN") + " Address: " + set("RESET") + shops.get(id).getAddress()+
-                set("YELLOW") +"\n----------");
+                set("CYAN") + " Address: " + set("RESET") + shops.get(id).getAddress() +
+                set("YELLOW") + "\n----------");
 
 
         for (Item item : shops.get(id).getItems()) {
@@ -200,14 +197,14 @@ public class ProgramFacade extends ReadWriteData {
         }
 
         if (logInUser != null) {
-            System.out.println( set("CYAN") + "Your current money: "+ set("RESET") +userFeatures.retMoney()+
-                    set("YELLOW") +"\n----------"+set("RESET"));
+            System.out.println(set("CYAN") + "Your current money: " + set("RESET") + userFeatures.retMoney() +
+                    set("YELLOW") + "\n----------" + set("RESET"));
 
-            do{
-                System.out.println("Type "+set("BLUE") +"name "+set("RESET") +
-                        "of item and "+set("BLUE") +"count "+set("RESET")+"for buy, example:"+
-                        set("BLUE") +" Peony 1"+set("RESET"));
-                System.out.println("Type "+set("BLUE") +"exit"+set("RESET")+" to go back:");
+            do {
+                System.out.println("Type " + set("BLUE") + "name " + set("RESET") +
+                        "of item and " + set("BLUE") + "count " + set("RESET") + "for buy, example:" +
+                        set("BLUE") + " Peony 1" + set("RESET"));
+                System.out.println("Type " + set("BLUE") + "exit" + set("RESET") + " to go back:");
 
                 Scanner in = new Scanner(System.in);
                 String choice = in.nextLine();
@@ -216,9 +213,9 @@ public class ProgramFacade extends ReadWriteData {
                     displayAccountPage();
                 }
 
-                flag = !userFeatures.BuyItem(choice, id, shops);
-            }while (flag);
-
+                flag = !userFeatures.BuyItem(choice, shops.get(id));
+            } while (flag);
+            WriteShopData(shops);
             displayShopPage(id);
         }
         goBack("ShowShops");
@@ -227,10 +224,11 @@ public class ProgramFacade extends ReadWriteData {
     /**
      * COMPLETE
      * This method is used to go backward between pages
+     *
      * @param forward - the name of the page to be opened
      */
     private void goBack(String forward) {
-        System.out.println("Type "+set("BLUE") +"exit "+set("RESET") +"to go back: ");
+        System.out.println("Type " + set("BLUE") + "exit " + set("RESET") + "to go back: ");
         Scanner in = new Scanner(System.in);
         String choice = in.nextLine();
         if (Objects.equals(choice, "exit")) {
@@ -240,97 +238,6 @@ public class ProgramFacade extends ReadWriteData {
                 displayAccountPage();
         }
         goBack(forward);
-    }
-
-    /**
-     * COMPLETE
-     * This method gets the name of the color and returns his code.
-     *
-     * @param color - name color. Example (RED, BLUE, RESET)
-     * @return code color. Example "\u001B[0m"
-     */
-    private String set(String color) {
-        return Color.valueOf(color).colorCode;
-    }
-
-    /**
-     * COMPLETE
-     * This method gets the text entered by the user and checks if it's a number or not.
-     * If it is not a number, the user has to enter it again.
-     *
-     * @return number
-     */
-    private int myScanner() {
-        int input = 0;
-        boolean flag;
-        do {
-            try {
-                Scanner in = new Scanner(System.in);
-                input = in.nextInt();
-                flag = false;
-            } catch (Exception ex) {
-                System.out.println(set("RED") + "Please enter a number!" + set("RESET"));
-                flag = true;
-            }
-        } while (flag);
-        return input;
-    }
-
-    /**
-     * COMPLETE
-     * This method creates ready-made users (clients and employees).
-     * Then save them to a file "usersData.txt".
-     */
-    public void createBasicListUsers() {
-        ArrayList<User> users = new ArrayList<>();
-        Client Ruslan = new Client(0, "Ruslan", "421951305305", "LuxLux", "123456");
-        Client Sam = new Client(1, "Sam", "421951305305", "1", "1");
-        Client Maria = new Client(2, "Maria", "421951306306", "MariMari", "001122");
-        Client Tom = new Client(3, "Tom", "421951123123", "KobiKo", "159753");
-        Employee Daniela = new Employee(4, "Daniela", "421951741258", "2", "2");
-
-        users.add(Ruslan);
-        users.add(Sam);
-        users.add(Maria);
-        users.add(Tom);
-        users.add(Daniela);
-        WriteUserData(users);
-        System.out.println("Create Users!!!");
-    }
-
-    /**
-     * COMPLETE
-     * This method creates ready-made products.
-     * Adds them to the ready-made store.
-     * And creates copies of the store.
-     * Then saves them to a file "shopsData.txt".
-     */
-    public void createBasicListShops() {
-        ArrayList<Shop> shops = new ArrayList<>();
-        Item Peony = new Item(0, "Peony", 3);
-        Item Rose = new Item(1, "Rose", 5.5);
-        Item Fir = new Item(2, "Fir", 15);
-        Item Cactus = new Item(3, "Cactus", 7.98);
-
-        Shop HappyChappy = new Shop(1, "HappyChappy", "Kosice Jedlikova 9");
-        HappyChappy.AddItem(Peony);
-        HappyChappy.AddItem(Rose);
-        HappyChappy.AddItem(Fir);
-        HappyChappy.AddItem(Cactus);
-
-// патерн "Prototype" клонирования магазина
-        ShopFactory factory = new ShopFactory(HappyChappy);
-        Shop FlowerCat = factory.CloneShop();
-        Shop AsiaFlower = factory.CloneShop();
-        FlowerCat.setNameAddress("FlowerCat", "Hlavna 11");
-        AsiaFlower.setNameAddress("AsiaFlower", "Hlavna 3");
-
-        shops.add(HappyChappy);
-        shops.add(FlowerCat);
-        shops.add(AsiaFlower);
-
-        WriteShopData(shops);
-        System.out.println("Create Shops!!!");
     }
 
 }

@@ -1,10 +1,13 @@
 package shops;
 
+import features.Color;
+import features.Feature;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public final class ShoppingCart implements Serializable {
+public final class ShoppingCart extends Feature implements Serializable{
     private static ShoppingCart instance;
     public final String name;
     ArrayList<Item> items = new ArrayList<Item>();
@@ -31,7 +34,7 @@ public final class ShoppingCart implements Serializable {
 
     public void ShowShoppingCart(){
         if(items.size() == 0)
-            System.out.println("Your Shopping Cart is empty");
+            System.out.println(set("RED") +"Your Shopping Cart is empty"+set("RESET"));
         else
             for (Item item : items) {
                 item.ShowItemInfo(0);

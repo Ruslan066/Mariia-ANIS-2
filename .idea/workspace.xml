@@ -4,12 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ddaf963a-dcfe-4c98-b568-29f5f8ecdb52" name="Changes" comment="create COMMENTS for displayShopsPage">
+    <list default="true" id="ddaf963a-dcfe-4c98-b568-29f5f8ecdb52" name="Changes" comment="create COMMENTS for ProgramFacade">
+      <change afterPath="$PROJECT_DIR$/src/features/Feature.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shopsData.txt" beforeDir="false" afterPath="$PROJECT_DIR$/shopsData.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ProgramFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProgramFacade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shops/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/shops/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shops/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/shops/Shop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/Color.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/Color.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shops/ShoppingCart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/shops/ShoppingCart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/users/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/users/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/users/UserFeatures.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/users/UserFeatures.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usersData.txt" beforeDir="false" afterPath="$PROJECT_DIR$/usersData.txt" afterDir="false" />
     </list>
@@ -22,8 +24,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -80,7 +82,7 @@
       <workItem from="1673391934197" duration="7774000" />
       <workItem from="1673441261048" duration="4378000" />
       <workItem from="1673519387230" duration="232000" />
-      <workItem from="1673898046608" duration="3997000" />
+      <workItem from="1673898046608" duration="12414000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1672229477430</created>
@@ -138,7 +140,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673445672892</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="create COMMENTS for ProgramFacade">
+      <created>1673902811880</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1673902811880</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -177,6 +186,7 @@
     <MESSAGE value="create Color class enum. Edit User class" />
     <MESSAGE value="create COMMENTS" />
     <MESSAGE value="create COMMENTS for displayShopsPage" />
-    <option name="LAST_COMMIT_MESSAGE" value="create COMMENTS for displayShopsPage" />
+    <MESSAGE value="create COMMENTS for ProgramFacade" />
+    <option name="LAST_COMMIT_MESSAGE" value="create COMMENTS for ProgramFacade" />
   </component>
 </project>
