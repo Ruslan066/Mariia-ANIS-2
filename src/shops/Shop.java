@@ -73,6 +73,13 @@ public class Shop implements Copyable, Serializable {
         return Color.valueOf(color).colorCode;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
 
     public ArrayList<Item> getItems() {
         return items;

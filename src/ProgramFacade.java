@@ -45,9 +45,9 @@ public class ProgramFacade extends ReadWriteData {
             case 3 -> displayShopsPage();
             case 4 -> System.exit(0);
             default -> {
-                System.out.println(set("RED") + "Please enter a number "+
-                        set("BLUE")+"1 - 4"+
-                        set("RED")+"!" + set("RESET"));
+                System.out.println(set("RED") + "Please enter a number " +
+                        set("BLUE") + "1 - 4" +
+                        set("RED") + "!" + set("RESET"));
                 displayHomePage();
             }
         }
@@ -75,15 +75,15 @@ public class ProgramFacade extends ReadWriteData {
             choice = myScanner();
             flag = false;
             if (logInUser.isEmployee() && (choice > 3 || choice < 1)) {
-                System.out.println(set("RED") + "Please enter a number "+
-                        set("BLUE")+"1 - 3"+
-                        set("RED")+"!" + set("RESET"));
+                System.out.println(set("RED") + "Please enter a number " +
+                        set("BLUE") + "1 - 3" +
+                        set("RED") + "!" + set("RESET"));
                 flag = true;
             }
             if (!logInUser.isEmployee() && (choice > 4 || choice < 1)) {
-                System.out.println(set("RED") + "Please enter a number "+
-                        set("BLUE")+"1 - 4"+
-                        set("RED")+"!" + set("RESET"));
+                System.out.println(set("RED") + "Please enter a number " +
+                        set("BLUE") + "1 - 4" +
+                        set("RED") + "!" + set("RESET"));
                 flag = true;
             }
         } while (flag);
@@ -126,9 +126,9 @@ public class ProgramFacade extends ReadWriteData {
             choice = myScanner();
             flag = false;
             if (choice > 3 || choice < 1) {
-                System.out.println(set("RED") + "Please enter a number "+
-                        set("BLUE")+"1 - 3"+
-                        set("RED")+"!" + set("RESET"));
+                System.out.println(set("RED") + "Please enter a number " +
+                        set("BLUE") + "1 - 3" +
+                        set("RED") + "!" + set("RESET"));
                 flag = true;
             }
         } while (flag);
@@ -153,58 +153,84 @@ public class ProgramFacade extends ReadWriteData {
      * and information about them.
      */
     private void displayShopsPage() {
-        System.out.println(set("YELLOW") + "=--" + set("PURPLE") +" Shops "+set("YELLOW") + "--="+ set("RESET"));
+        System.out.println(set("YELLOW") + "=--" + set("PURPLE") + " Shops " + set("YELLOW") + "--=" + set("RESET"));
         for (Shop shop : shops) {
             shop.ShowShopInfo();
-            System.out.println(set("YELLOW") +"----------"+ set("RESET"));
+            System.out.println(set("YELLOW") + "----------" + set("RESET"));
         }
-        System.out.println("Type "+set("BLUE")+"id"+set("RESET")+" of shop for more detail or type "+set("BLUE")+"0"+set("RESET")+" to go back: ");
+        System.out.println("Type " + set("BLUE") + "id" + set("RESET") + " of shop for more detail or type " + set("BLUE") + "0" + set("RESET") + " to go back: ");
         int choice;
         boolean flag;
         do {
             choice = myScanner();
-            if(choice == 0)
-                if(logInUser == null)
+            if (choice == 0)
+                if (logInUser == null)
                     displayHomePage();
                 else
                     displayAccountPage();
             flag = false;
             if (choice > shops.size() || choice < 0) {
-                System.out.println(set("RED") + "Please enter a number "+
-                        set("BLUE")+"0 - "+ shops.size()+
-                        set("RED")+"!" + set("RESET"));
+                System.out.println(set("RED") + "Please enter a number " +
+                        set("BLUE") + "0 - " + shops.size() +
+                        set("RED") + "!" + set("RESET"));
                 flag = true;
             }
         } while (flag);
-        displayShopPage(choice-1);
+        displayShopPage(choice - 1);
     }
 
+    /**
+     * COMPLETE
+     * This method displays the page with the selected store.
+     * If the user is logged into the account he has the possibility to buy the product
+     * @param id - store number in the array (shops)
+     */
     private void displayShopPage(int id) {
-        int percent = 0;
+        int percent = logInUser != null ? userFeatures.retPercent() : 0;
+        boolean flag = true;
+        System.out.println(set("YELLOW") + "=--" + set("PURPLE") + " Shop " + set("GREEN") +
+                shops.get(id).getName() + set("YELLOW") + " --=");
+        System.out.println(set("CYAN") + "id: " + set("RESET") + shops.get(id).getId() +
+                set("CYAN") + " Address: " + set("RESET") + shops.get(id).getAddress()+
+                set("YELLOW") +"\n----------");
 
-        shops.get(id).ShowShopInfo();
-        if (logInUser != null) {
-            percent = userFeatures.retPercent();
-        }
+
         for (Item item : shops.get(id).getItems()) {
             item.ShowItemInfo(percent);
         }
+
         if (logInUser != null) {
-            System.out.println("Type NAME of item and COUNT for buy, example: Peony 1");
-            System.out.println("Type exit to go back:");
-            Scanner in = new Scanner(System.in);
-            String choice = in.nextLine();
-            if (Objects.equals(choice, "exit")) {
-                displayAccountPage();
-            }
-            userFeatures.BuyItem(choice, id, shops);
+            System.out.println( set("CYAN") + "Your current money: "+ set("RESET") +userFeatures.retMoney()+
+                    set("YELLOW") +"\n----------"+set("RESET"));
+
+            do{
+                System.out.println("Type "+set("BLUE") +"name "+set("RESET") +
+                        "of item and "+set("BLUE") +"count "+set("RESET")+"for buy, example:"+
+                        set("BLUE") +" Peony 1"+set("RESET"));
+                System.out.println("Type "+set("BLUE") +"exit"+set("RESET")+" to go back:");
+
+                Scanner in = new Scanner(System.in);
+                String choice = in.nextLine();
+
+                if (Objects.equals(choice, "exit")) {
+                    displayAccountPage();
+                }
+
+                flag = !userFeatures.BuyItem(choice, id, shops);
+            }while (flag);
+
             displayShopPage(id);
         }
         goBack("ShowShops");
     }
 
+    /**
+     * COMPLETE
+     * This method is used to go backward between pages
+     * @param forward - the name of the page to be opened
+     */
     private void goBack(String forward) {
-        System.out.println("Type exit to go back: ");
+        System.out.println("Type "+set("BLUE") +"exit "+set("RESET") +"to go back: ");
         Scanner in = new Scanner(System.in);
         String choice = in.nextLine();
         if (Objects.equals(choice, "exit")) {

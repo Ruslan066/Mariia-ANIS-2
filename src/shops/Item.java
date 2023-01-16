@@ -1,5 +1,7 @@
 package shops;
 
+import features.Color;
+
 import java.io.Serializable;
 
 public class Item implements Copyable, Serializable {
@@ -19,13 +21,23 @@ public class Item implements Copyable, Serializable {
         double costPercent = this.cost - (percent/100.0) * this.cost;
         double newCost = (double) Math.round(costPercent * 100) / 100;
         System.out.println(
-                        "Name: " + this.name +
-                        "\nCost: " + newCost+
-                        "\nCount: " + this.count+
-                        "\n----------");
+                set("CYAN") +"Name: " +set("RESET")+ this.name +
+                        set("CYAN") +"\nCost: " +set("RESET")+ newCost+
+                        set("CYAN") +"\nCount: " +set("RESET")+ this.count+
+                        set("YELLOW") +"\n----------"+set("RESET"));
     }
     public void ChangeCount(int count){
         this.count -= count;
+    }
+    /**
+     * COMPLETE
+     * This method gets the name of the color and returns his code.
+     *
+     * @param color - name color. Example (RED, BLUE, RESET)
+     * @return code color. Example "\u001B[0m"
+     */
+    private String set(String color) {
+        return Color.valueOf(color).colorCode;
     }
 
     public String getName() {

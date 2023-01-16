@@ -4,12 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ddaf963a-dcfe-4c98-b568-29f5f8ecdb52" name="Changes" comment="create COMMENTS">
+    <list default="true" id="ddaf963a-dcfe-4c98-b568-29f5f8ecdb52" name="Changes" comment="create COMMENTS for displayShopsPage">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shopsData.txt" beforeDir="false" afterPath="$PROJECT_DIR$/shopsData.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ProgramFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProgramFacade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shops/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/shops/Item.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/shops/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/shops/Shop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shops/ShopFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/shops/ShopFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/users/UserFeatures.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/users/UserFeatures.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usersData.txt" beforeDir="false" afterPath="$PROJECT_DIR$/usersData.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,27 +41,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/luxus/Downloads/WakaTime.jar&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "TODO_SCOPE": "All Places",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/luxus/Downloads/WakaTime.jar",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.grazie",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ]
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -75,7 +78,9 @@
       <workItem from="1673215536459" duration="6336000" />
       <workItem from="1673363425609" duration="13411000" />
       <workItem from="1673391934197" duration="7774000" />
-      <workItem from="1673441261048" duration="3773000" />
+      <workItem from="1673441261048" duration="4378000" />
+      <workItem from="1673519387230" duration="232000" />
+      <workItem from="1673898046608" duration="3997000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1672229477430</created>
@@ -126,7 +131,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673399857442</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="create COMMENTS for displayShopsPage">
+      <created>1673445672892</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1673445672892</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -164,6 +176,7 @@
     <MESSAGE value="create package features. create Facade" />
     <MESSAGE value="create Color class enum. Edit User class" />
     <MESSAGE value="create COMMENTS" />
-    <option name="LAST_COMMIT_MESSAGE" value="create COMMENTS" />
+    <MESSAGE value="create COMMENTS for displayShopsPage" />
+    <option name="LAST_COMMIT_MESSAGE" value="create COMMENTS for displayShopsPage" />
   </component>
 </project>

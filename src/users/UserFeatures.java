@@ -1,5 +1,6 @@
 package users;
 
+import features.Color;
 import features.ReadWriteData;
 import shops.Item;
 import shops.Shop;
@@ -121,27 +122,30 @@ public class UserFeatures extends ReadWriteData {
 
     //Client
     public int retPercent(){
-        System.out.println("Your current money: " + logInClient.getMoney());
         return logInClient.getDiscountPercent();
     }
     //Client
-    public void BuyItem(String choice, int id, ArrayList<Shop> shops) {
+    public double retMoney(){
+        return logInClient.getMoney();
+    }
+    //Client
+    public boolean BuyItem(String choice, int id, ArrayList<Shop> shops) {
 
         String[] words = choice.trim().split("\\s+");
         try {
             for (Item item : shops.get(id).getItems()) {
                 if (Objects.equals(words[0], item.getName())) {
                     if (words.length != 2) {
-                        System.out.println("You type the wrong request!");
-                        BuyItem(choice, id, shops);
+                        System.out.println(set("RED") +"You type the wrong request!"+set("RESET"));
+                        return false;
                     }
                     if (item.getCount() < Integer.parseInt(words[1])) {
-                        System.out.println("The amount of product in the store is less than you want to buy!");
-                        BuyItem(choice, id, shops);
+                        System.out.println(set("RED") +"The amount of product in the store is less than you want to buy!"+set("RESET"));
+                        return false;
                     }
                     if (logInClient.getMoney() < item.getCost() * Integer.parseInt(words[1])) {
-                        System.out.println("You don't have enough money to buy!");
-                        BuyItem(choice, id, shops);
+                        System.out.println(set("RED") +"You don't have enough money to buy!"+set("RESET"));
+                        return false;
                     }
                     item.ChangeCount(Integer.parseInt(words[1]));
 
@@ -151,13 +155,24 @@ public class UserFeatures extends ReadWriteData {
                     WriteShopData(shops);
                     users.set(logInClient.getId(), logInClient);
                     WriteUserData(users);
+                    return true;
                 }
             }
 
         } catch (Exception exception) {
             System.out.println(exception);
-            System.out.println("You type the wrong value: NAME");
-            BuyItem(choice, id, shops);
+            return false;
         }
+        return false;
+    }
+    /**
+     * COMPLETE
+     * This method gets the name of the color and returns his code.
+     *
+     * @param color - name color. Example (RED, BLUE, RESET)
+     * @return code color. Example "\u001B[0m"
+     */
+    private String set(String color) {
+        return Color.valueOf(color).colorCode;
     }
 }
