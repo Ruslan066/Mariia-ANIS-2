@@ -1,6 +1,5 @@
 package shops;
 
-import features.Color;
 import features.Feature;
 
 import java.io.Serializable;
@@ -10,7 +9,7 @@ import java.util.Objects;
 public final class ShoppingCart extends Feature implements Serializable{
     private static ShoppingCart instance;
     public final String name;
-    ArrayList<Item> items = new ArrayList<Item>();
+    ArrayList<Item> items = new ArrayList<>();
 
     private ShoppingCart(String name){
         this.name = name;

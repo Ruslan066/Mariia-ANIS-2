@@ -1,14 +1,14 @@
 package shops;
 
-import features.Color;
+import features.Feature;
 
 import java.io.Serializable;
 
-public class Item implements Copyable, Serializable {
-    private int id;
-    private String name;
+public class Item extends Feature implements Copyable, Serializable {
+    private final int id;
+    private final String name;
     private int count;
-    private double cost;
+    private final double cost;
 
     public Item(int id, String name, double cost) {
         this.id = id;
@@ -17,6 +17,11 @@ public class Item implements Copyable, Serializable {
         this.count = 10;
     }
 
+    /**
+     * COMPLETE
+     * This method displays information about the product
+     * @param percent - discount percentage, by how much % less expensive to display products
+     */
     public void ShowItemInfo(int percent){
         double costPercent = this.cost - (percent/100.0) * this.cost;
         double newCost = (double) Math.round(costPercent * 100) / 100;
@@ -26,20 +31,29 @@ public class Item implements Copyable, Serializable {
                         set("CYAN") +"\nCount: " +set("RESET")+ this.count+
                         set("YELLOW") +"\n----------"+set("RESET"));
     }
-    public void ChangeCount(int count){
-        this.count -= count;
-    }
+
     /**
      * COMPLETE
-     * This method gets the name of the color and returns his code.
-     *
-     * @param color - name color. Example (RED, BLUE, RESET)
-     * @return code color. Example "\u001B[0m"
+     * This method decreases the amount of product
+     * @param count - number by how much to decrease the number of items
      */
-    private String set(String color) {
-        return Color.valueOf(color).colorCode;
+    public void DecreaseCount(int count){
+        this.count -= count;
     }
 
+    /**
+     * COMPLETE
+     * This method Increase the amount of product
+     * @param count - number by how much to Increase the number of items
+     */
+    public void IncreaseCount(int count){
+        this.count += count;
+    }
+
+    /**
+     * Getters
+     * give a value from private variables
+     */
     public String getName() {
         return name;
     }
@@ -48,12 +62,20 @@ public class Item implements Copyable, Serializable {
         return cost;
     }
 
-    public void setCount(int count) {
-        this.count = count;
-    }
-
     public int getCount() {
         return count;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * Setters
+     * set a value to private variables
+     */
+    public void setCount(int count) {
+        this.count = count;
     }
 
     @Override

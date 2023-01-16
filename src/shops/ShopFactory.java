@@ -8,10 +8,6 @@ public class ShopFactory {
         this.shop = shop;
         this.id = shop.getId();
     }
-    public void SetShop(Shop shop) {
-        this.shop = shop;
-        this.id = shop.getId();
-    }
     public Shop CloneShop(){
         id++;
         return (Shop) shop.copy(id);

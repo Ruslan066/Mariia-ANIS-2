@@ -122,7 +122,7 @@ public class UserFeatures extends Feature {
      * This method allows the user to select a discount card
      */
     public void ChooseDiscountCard() {
-        boolean flag = true;
+        boolean flag;
         System.out.println(set("YELLOW") + "=--" + set("PURPLE") + " Choose a discount card " + set("YELLOW") + "--=" + set("RESET"));
 
         System.out.print(set("CYAN") + "Discount card: ");
@@ -186,7 +186,7 @@ public class UserFeatures extends Feature {
                         System.out.println(set("RED") + "You don't have enough money to buy!" + set("RESET"));
                         return false;
                     }
-                    item.ChangeCount(Integer.parseInt(words[1]));
+                    item.DecreaseCount(Integer.parseInt(words[1]));
 
                     double costPercent = item.getCost() - (logInClient.getDiscountPercent() / 100.0) * item.getCost();
                     logInClient.setMoney(costPercent * Integer.parseInt(words[1]));
@@ -205,4 +205,5 @@ public class UserFeatures extends Feature {
         return false;
     }
 
+    // TODO: COMPLETE (UserFeatures, ProgramFacade, Feature, Item)
 }

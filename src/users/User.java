@@ -1,10 +1,9 @@
 package users;
-
-import features.Color;
+import features.Feature;
 
 import java.io.Serializable;
 
-public abstract class User implements Serializable {
+public abstract class User extends Feature implements Serializable {
     private final int id;
     private final String name;
     private final String phoneNumber;
@@ -22,16 +21,6 @@ public abstract class User implements Serializable {
     }
 
     public abstract void ShowUserInfo();
-
-    /**
-     * COMPLETE
-     * This method gets the name of the color and returns his code.
-     * @param color - name color. Example (RED, BLUE, RESET)
-     * @return code color. Example "\u001B[0m"
-     */
-    public String set(String color) {
-        return Color.valueOf(color).colorCode;
-    }
 
     //Getter
     public int getId() { return id; }
