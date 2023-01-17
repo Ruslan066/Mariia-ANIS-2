@@ -3,12 +3,21 @@ package features;
 import shops.Shop;
 import users.User;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class ReadWriteData {
 
-    public void WriteUserData(ArrayList<User> users){
+    /**
+     * COMPLETE
+     * This method writes users to the file
+     *
+     * @param users - list objects of User
+     */
+    public void writeUserData(ArrayList<User> users) {
         try {
             FileOutputStream file = new FileOutputStream("usersData.txt");
 
@@ -18,13 +27,18 @@ public class ReadWriteData {
             // Writes objects to the output stream
             output.writeObject(users);
             output.close();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.getStackTrace();
         }
     }
 
-    public void WriteShopData(ArrayList<Shop> shops){
+    /**
+     * COMPLETE
+     * This method writes shops to the file
+     *
+     * @param shops - list objects of Shop
+     */
+    public void writeShopData(ArrayList<Shop> shops) {
         try {
             FileOutputStream file = new FileOutputStream("shopsData.txt");
 
@@ -34,13 +48,18 @@ public class ReadWriteData {
             // Writes objects to the output stream
             output.writeObject(shops);
             output.close();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.getStackTrace();
         }
     }
 
-    public static ArrayList<User> ReadUserData(){
+    /**
+     * COMPLETE
+     * This method read users from the file
+     *
+     * @return users - list objects of User
+     */
+    public static ArrayList<User> readUserData() {
         ArrayList<User> users = new ArrayList<>();
         try {
             FileInputStream fileStream = new FileInputStream("usersData.txt");
@@ -51,15 +70,19 @@ public class ReadWriteData {
             // Reads the objects
             users = (ArrayList<User>) input.readObject();
             input.close();
-        }
-
-        catch (Exception e) {
+        } catch (Exception e) {
             e.getStackTrace();
         }
         return users;
     }
 
-    public ArrayList<Shop> ReadShopData(){
+    /**
+     * COMPLETE
+     * This method read shops from the file
+     *
+     * @return shops - list objects of Shop
+     */
+    public ArrayList<Shop> readShopData() {
         ArrayList<Shop> shops = new ArrayList<>();
         try {
             FileInputStream fileStream = new FileInputStream("shopsData.txt");
@@ -70,9 +93,7 @@ public class ReadWriteData {
             // Reads the objects
             shops = (ArrayList<Shop>) input.readObject();
             input.close();
-        }
-
-        catch (Exception e) {
+        } catch (Exception e) {
             e.getStackTrace();
         }
         return shops;

@@ -22,7 +22,7 @@ public class ProgramFacade extends Feature {
      * This method display the start page of the application.
      */
     public void displayHomePage() {
-        shops = ReadShopData();
+        shops = readShopData();
         System.out.println(set("YELLOW") + "=--" + set("PURPLE") + " Welcome " + set("YELLOW") + "--=");
         System.out.println(set("BLUE") + "1" + set("RESET") + ": LogIn");
         System.out.println(set("BLUE") + "2" + set("RESET") + ": Create account");
@@ -31,11 +31,11 @@ public class ProgramFacade extends Feature {
         int choice = myScanner();
         switch (choice) {
             case 1 -> {
-                logInUser = userFeatures.LogIn();
+                logInUser = userFeatures.logIn();
                 displayAccountPage();
             }
             case 2 -> {
-                logInUser = userFeatures.CreateNewUser();
+                logInUser = userFeatures.createNewUser();
                 displayAccountPage();
             }
             case 3 -> displayShopsPage();
@@ -92,7 +92,7 @@ public class ProgramFacade extends Feature {
                     logInUser = null;
                     displayHomePage();
                 }
-                userFeatures.ShowMyProducts();
+                userFeatures.showMyProducts();
                 goBack("AccountPage");
             }
             case 4 -> {
@@ -107,7 +107,7 @@ public class ProgramFacade extends Feature {
      * This method displays a page with information about the user.
      */
     private void displayUserInfoPage() {
-        logInUser.ShowUserInfo();
+        logInUser.showUserInfo();
 
         if (logInUser.isEmployee())
             goBack("AccountPage");
@@ -132,11 +132,11 @@ public class ProgramFacade extends Feature {
 
         switch (choice) {
             case 1 -> {
-                userFeatures.TopUpAccount();
+                userFeatures.topUpAccount();
                 displayUserInfoPage();
             }
             case 2 -> {
-                userFeatures.ChooseDiscountCard();
+                userFeatures.chooseDiscountCard();
                 displayUserInfoPage();
             }
             case 3 -> displayAccountPage();
@@ -151,7 +151,7 @@ public class ProgramFacade extends Feature {
     private void displayShopsPage() {
         System.out.println(set("YELLOW") + "=--" + set("PURPLE") + " Shops " + set("YELLOW") + "--=" + set("RESET"));
         for (Shop shop : shops) {
-            shop.ShowShopInfo();
+            shop.showShopInfo();
             System.out.println(set("YELLOW") + "----------" + set("RESET"));
         }
         System.out.println("Type " + set("BLUE") + "id" + set("RESET") + " of shop for more detail or type " + set("BLUE") + "0" + set("RESET") + " to go back: ");
@@ -183,7 +183,14 @@ public class ProgramFacade extends Feature {
      * @param id - store number in the array (shops)
      */
     private void displayShopPage(int id) {
-        int percent = logInUser != null ? userFeatures.retPercent() : 0;
+        int percent;
+        if(logInUser == null)
+            percent = 0;
+        else if(logInUser.isEmployee())
+            percent = 0;
+        else
+            percent = userFeatures.retPercent();
+
         boolean flag = true;
         System.out.println(set("YELLOW") + "=--" + set("PURPLE") + " Shop " + set("GREEN") +
                 shops.get(id).getName() + set("YELLOW") + " --=");
@@ -193,12 +200,15 @@ public class ProgramFacade extends Feature {
 
 
         for (Item item : shops.get(id).getItems()) {
-            item.ShowItemInfo(percent);
+            item.showItemInfo(percent);
         }
 
         if (logInUser != null) {
-            System.out.println(set("CYAN") + "Your current money: " + set("RESET") + userFeatures.retMoney() +
+            if(!logInUser.isEmployee())
+                System.out.println(set("CYAN") + "Your current money: " + set("RESET") + userFeatures.retMoney() +
                     set("YELLOW") + "\n----------" + set("RESET"));
+
+            //TODO сделать для employee свою реализацию
 
             do {
                 System.out.println("Type " + set("BLUE") + "name " + set("RESET") +
@@ -213,9 +223,10 @@ public class ProgramFacade extends Feature {
                     displayAccountPage();
                 }
 
-                flag = !userFeatures.BuyItem(choice, shops.get(id));
+                flag = !userFeatures.buyItem(choice, shops.get(id));
             } while (flag);
-            WriteShopData(shops);
+            writeShopData(shops);
+
             displayShopPage(id);
         }
         goBack("ShowShops");

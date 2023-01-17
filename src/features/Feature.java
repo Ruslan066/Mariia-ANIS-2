@@ -64,7 +64,7 @@ public class Feature extends ReadWriteData{
         users.add(Maria);
         users.add(Tom);
         users.add(Daniela);
-        WriteUserData(users);
+        writeUserData(users);
         System.out.println("Create Users!!!");
     }
 
@@ -83,10 +83,10 @@ public class Feature extends ReadWriteData{
         Item Cactus = new Item(3, "Cactus", 7.98);
 
         Shop HappyChappy = new Shop(1, "HappyChappy", "Kosice Jedlikova 9");
-        HappyChappy.AddItem(Peony);
-        HappyChappy.AddItem(Rose);
-        HappyChappy.AddItem(Fir);
-        HappyChappy.AddItem(Cactus);
+        HappyChappy.addItem(Peony);
+        HappyChappy.addItem(Rose);
+        HappyChappy.addItem(Fir);
+        HappyChappy.addItem(Cactus);
 
 // патерн "Prototype" клонирования магазина
         ShopFactory factory = new ShopFactory(HappyChappy);
@@ -99,7 +99,7 @@ public class Feature extends ReadWriteData{
         shops.add(FlowerCat);
         shops.add(AsiaFlower);
 
-        WriteShopData(shops);
+        writeShopData(shops);
         System.out.println("Create Shops!!!");
     }
 }

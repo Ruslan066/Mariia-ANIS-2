@@ -15,20 +15,43 @@ public class Client extends User {
         this.discountPercent = DiscountCard.valueOf(discountCard).ordinal();
     }
 
-    public void AddItemToShoppingCart(Item item, int count) {
+    /**
+     * COMPLETE
+     * This method add bought product to Shopping Cart
+     * @param item - bought product
+     * @param count - amount of item
+     */
+    public void addItemToShoppingCart(Item item, int count) {
         shoppingCart.addItem(item, count);
     }
 
-    public void setMoney(double money) {
+    /**
+     * COMPLETE
+     * This method removes money from the account
+     * @param money - amount of money
+     */
+    public void pay(double money) {
         this.money -= money;
         this.money = (double) Math.round(this.money * 100) / 100;
 
     }
-    public void MakeDeposit(double deposit) {
+
+    /**
+     * COMPLETE
+     * This method add money to the account
+     * @param deposit - amount of money
+     */
+    public void makeDeposit(double deposit) {
         this.money += deposit;
     }
 
-    public boolean SetDiscountCard(String card) {
+    /**
+     * COMPLETE
+     * This method sets the discount card and % discount
+     * @param card - name card
+     * @return true if name card exist, false if not exist
+     */
+    public boolean setDiscountCard(String card) {
         for (DiscountCard dc : DiscountCard.values()) {
             if (dc.name().equals(card)) {
                 this.discountCard = card;
@@ -40,9 +63,12 @@ public class Client extends User {
         return false;
     }
 
-    //From Class User
+    /**
+     * COMPLETE
+     * This method implement from User class and displays information about the Client
+     */
     @Override
-    public void ShowUserInfo() {
+    public void showUserInfo() {
         System.out.println(
                 set("YELLOW") + "=--" + set("PURPLE") +" Client "+ set("GREEN") + "info" + set("YELLOW") + " --=" +
                         set("CYAN") +"\nName: " + set("RESET") + super.getName() +
@@ -55,7 +81,10 @@ public class Client extends User {
                         set("CYAN") +"\nisEmployee: " + set("RESET")+ super.isEmployee());
     }
 
-    //Getter
+    /**
+     * Getters
+     * give a value from private variables
+     */
     public int getDiscountPercent() {
         return discountPercent;
     }

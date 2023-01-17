@@ -17,6 +17,7 @@ public class Shop extends Feature implements Copyable, Serializable {
         this.address = address;
     }
 
+
     public Shop(int id, String name, String address, ArrayList<Item> itemss) {
         this.id = id;
         this.name = name;
@@ -24,26 +25,32 @@ public class Shop extends Feature implements Copyable, Serializable {
         this.items = itemss;
     }
 
-    public void AddItem(Item item) {
+    /**
+     * COMPLETE
+     * This method adds item to the Shop
+     * @param item - object Item
+     */
+    public void addItem(Item item) {
         items.add(item);
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void ShowShopInfo() {
+    /**
+     * COMPLETE
+     * This method displays information about the Shop
+     */
+    public void showShopInfo() {
         System.out.println(
                 set("CYAN") + "id: " + set("RESET") + this.id +
                         set("CYAN") + " Name: " + set("RESET") + this.name +
                         set("CYAN") + " Address: " + set("RESET") + this.address);
     }
 
-    public void setNameAddress(String name, String address) {
-        this.name = name;
-        this.address = address;
-    }
-
+    /**
+     * COMPLETE
+     * This method implements a design pattern Prototype
+     * @param id - for new copy object
+     * @return - a copy of this object
+     */
     @Override
     public Object copy(int id) {
         ArrayList<Item> new_items = new ArrayList<>();
@@ -52,6 +59,14 @@ public class Shop extends Feature implements Copyable, Serializable {
             new_items.add((Item) item.copy(0));
         }
         return new Shop(id, this.name, this.address, new_items);
+    }
+
+    /**
+     * Getters
+     * give a value from private variables
+     */
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -64,5 +79,14 @@ public class Shop extends Feature implements Copyable, Serializable {
 
     public ArrayList<Item> getItems() {
         return items;
+    }
+
+    /**
+     * Setters
+     * set a value to private variables
+     */
+    public void setNameAddress(String name, String address) {
+        this.name = name;
+        this.address = address;
     }
 }

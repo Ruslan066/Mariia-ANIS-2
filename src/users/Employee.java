@@ -6,15 +6,18 @@ public class Employee extends User {
         super(id, name, phoneNumber, login, password, true);
     }
 
-    //From Class User
+    /**
+     * COMPLETE
+     * This method implement from User class and displays information about the Employee
+     */
     @Override
-    public void ShowUserInfo() {
+    public void showUserInfo() {
         System.out.println(
                 set("YELLOW") + "=--" + set("PURPLE") +" Employee "+ set("GREEN") + "info" + set("YELLOW") + " --=" +
-                        "\nName: " + super.getName() +
-                "\nPhone: " + super.getPhoneNumber() +
-                "\nLogin: " + super.getLogin() +
-                "\nPassword: " + super.getPassword() +
-                "\nisEmployee: " + super.isEmployee());
+                set("CYAN") + "\nName: " +  set("RESET") + super.getName() +
+                set("CYAN") + "\nPhone: " + set("RESET") + super.getPhoneNumber() +
+                set("CYAN") + "\nLogin: " + set("RESET") + super.getLogin() +
+                set("CYAN") + "\nPassword: " + set("RESET") + super.getPassword() +
+                set("CYAN") + "\nisEmployee: " + set("RESET") + super.isEmployee());
     }
 }

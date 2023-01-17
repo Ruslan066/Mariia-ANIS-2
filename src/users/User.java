@@ -20,7 +20,7 @@ public abstract class User extends Feature implements Serializable {
         this.isEmployee = isEmployee;
     }
 
-    public abstract void ShowUserInfo();
+    public abstract void showUserInfo();
 
     //Getter
     public int getId() { return id; }

@@ -15,7 +15,7 @@ public class UserFeatures extends Feature {
     private Employee logInEmployee = null;
 
     public UserFeatures() {
-        this.users = ReadUserData();
+        this.users = readUserData();
     }
 
     /**
@@ -24,7 +24,7 @@ public class UserFeatures extends Feature {
      *
      * @return - logInUser, User object
      */
-    public User LogIn() {
+    public User logIn() {
         Scanner in = new Scanner(System.in);
         boolean log = false;
         boolean pass = false;
@@ -50,7 +50,7 @@ public class UserFeatures extends Feature {
             }
         } else {
             System.out.println(set("RED") + "Incorrect login or password" + set("RESET"));
-            LogIn();
+            logIn();
         }
         return logInUser;
     }
@@ -61,7 +61,7 @@ public class UserFeatures extends Feature {
      *
      * @return - logInUser, User object
      */
-    public User CreateNewUser() {
+    public User createNewUser() {
 
         int id = users.size();
         Scanner in = new Scanner(System.in);
@@ -89,9 +89,9 @@ public class UserFeatures extends Feature {
         } else {
             System.out.println(set("RED") + "You type the wrong value: " + set("BLUE") + "true" +
                     set("RED") + " or " + set("BLUE") + "false" + set("RESET"));
-            CreateNewUser();
+            createNewUser();
         }
-        WriteUserData(users);
+        writeUserData(users);
         return logInUser;
     }
 
@@ -99,29 +99,29 @@ public class UserFeatures extends Feature {
      * COMPLETE
      * This method displays the page with the items that the user bought
      */
-    public void ShowMyProducts() {
+    public void showMyProducts() {
         System.out.println(set("YELLOW") + "=--" + set("PURPLE") + " My Shopping Cart " + set("YELLOW") + "--=" + set("RESET"));
-        logInClient.getShoppingCart().ShowShoppingCart();
+        logInClient.getShoppingCart().showShoppingCart();
     }
 
     /**
      * COMPLETE
      * This method displays the top-up page
      */
-    public void TopUpAccount() {
+    public void topUpAccount() {
         System.out.println(set("YELLOW") + "=--" + set("PURPLE") + " Top up account " + set("YELLOW") + "--=" + set("RESET"));
         System.out.println("Deposit amount:");
         int amount = myScanner();
-        logInClient.MakeDeposit(amount);
+        logInClient.makeDeposit(amount);
         users.set(logInClient.getId(), logInClient);
-        WriteUserData(users);
+        writeUserData(users);
     }
 
     /**
      * COMPLETE
      * This method allows the user to select a discount card
      */
-    public void ChooseDiscountCard() {
+    public void chooseDiscountCard() {
         boolean flag;
         System.out.println(set("YELLOW") + "=--" + set("PURPLE") + " Choose a discount card " + set("YELLOW") + "--=" + set("RESET"));
 
@@ -134,10 +134,10 @@ public class UserFeatures extends Feature {
             Scanner in = new Scanner(System.in);
             String card = in.nextLine();
 
-            flag = !logInClient.SetDiscountCard(card);
+            flag = !logInClient.setDiscountCard(card);
         } while (flag);
         users.set(logInClient.getId(), logInClient);
-        WriteUserData(users);
+        writeUserData(users);
     }
 
     /**
@@ -168,7 +168,7 @@ public class UserFeatures extends Feature {
      * @param shop   - store from the list of stores in which we will buy goods
      * @return - true: if successfully bought the product. false - If not bought
      */
-    public boolean BuyItem(String choice, Shop shop) {
+    public boolean buyItem(String choice, Shop shop) {
 
         String[] words = choice.trim().split("\\s+");
         try {
@@ -186,14 +186,14 @@ public class UserFeatures extends Feature {
                         System.out.println(set("RED") + "You don't have enough money to buy!" + set("RESET"));
                         return false;
                     }
-                    item.DecreaseCount(Integer.parseInt(words[1]));
+                    item.decreaseCount(Integer.parseInt(words[1]));
 
                     double costPercent = item.getCost() - (logInClient.getDiscountPercent() / 100.0) * item.getCost();
-                    logInClient.setMoney(costPercent * Integer.parseInt(words[1]));
-                    logInClient.AddItemToShoppingCart(item, Integer.parseInt(words[1]));
+                    logInClient.pay(costPercent * Integer.parseInt(words[1]));
+                    logInClient.addItemToShoppingCart(item, Integer.parseInt(words[1]));
 
                     users.set(logInClient.getId(), logInClient);
-                    WriteUserData(users);
+                    writeUserData(users);
                     return true;
                 }
             }
@@ -205,5 +205,5 @@ public class UserFeatures extends Feature {
         return false;
     }
 
-    // TODO: COMPLETE (UserFeatures, ProgramFacade, Feature, Item)
+    // TODO: COMPLETE (UserFeatures, ProgramFacade, Feature, Item) НАЗВАНИЯ МЕТОДОВ С МАЛЕНЬКОЙ
 }

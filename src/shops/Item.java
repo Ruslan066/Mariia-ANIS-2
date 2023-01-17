@@ -22,7 +22,7 @@ public class Item extends Feature implements Copyable, Serializable {
      * This method displays information about the product
      * @param percent - discount percentage, by how much % less expensive to display products
      */
-    public void ShowItemInfo(int percent){
+    public void showItemInfo(int percent){
         double costPercent = this.cost - (percent/100.0) * this.cost;
         double newCost = (double) Math.round(costPercent * 100) / 100;
         System.out.println(
@@ -37,7 +37,7 @@ public class Item extends Feature implements Copyable, Serializable {
      * This method decreases the amount of product
      * @param count - number by how much to decrease the number of items
      */
-    public void DecreaseCount(int count){
+    public void decreaseCount(int count){
         this.count -= count;
     }
 
@@ -46,7 +46,7 @@ public class Item extends Feature implements Copyable, Serializable {
      * This method Increase the amount of product
      * @param count - number by how much to Increase the number of items
      */
-    public void IncreaseCount(int count){
+    public void increaseCount(int count){
         this.count += count;
     }
 
@@ -78,6 +78,12 @@ public class Item extends Feature implements Copyable, Serializable {
         this.count = count;
     }
 
+    /**
+     * COMPLETE
+     * This method implements a design pattern Prototype
+     * @param id - for new copy object
+     * @return - a copy of this object
+     */
     @Override
     public Object copy(int id) {
         Item item = new Item(id, this.name, this.cost);
