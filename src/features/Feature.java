@@ -1,8 +1,6 @@
 package features;
 
-import shops.Item;
-import shops.Shop;
-import shops.ShopFactory;
+import shops.*;
 import users.Client;
 import users.Employee;
 import users.User;
@@ -77,16 +75,24 @@ public class Feature extends ReadWriteData{
      */
     public void createBasicListShops() {
         ArrayList<Shop> shops = new ArrayList<>();
-        Item Peony = new Item(0, "Peony", 3);
-        Item Rose = new Item(1, "Rose", 5.5);
-        Item Fir = new Item(2, "Fir", 15);
-        Item Cactus = new Item(3, "Cactus", 7.98);
+        Item Peony = new Flowers(0, "Peony", 3);
+        Item Rose = new Flowers(1, "Rose", 5.5);
+        Item Fir = new Flowers(2, "Fir", 15);
+        Item Cactus = new Flowers(3, "Cactus", 7.98);
+        Item Banana = new Fruits(4, "Banana", 1.65, 10,1000);
 
         Shop HappyChappy = new Shop(1, "HappyChappy", "Kosice Jedlikova 9");
         HappyChappy.addItem(Peony);
         HappyChappy.addItem(Rose);
         HappyChappy.addItem(Fir);
+
+        //патерн "Composite" Компоновщик
+        // Компоновщик — это структурный паттерн проектирования,
+        // который позволяет сгруппировать множество объектов в
+        // древовидную структуру, а затем работать с ней так,
+        // как будто это единичный объект.
         HappyChappy.addItem(Cactus);
+        HappyChappy.addItem(Banana);
 
 // патерн "Prototype" клонирования магазина
         ShopFactory factory = new ShopFactory(HappyChappy);

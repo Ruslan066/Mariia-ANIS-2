@@ -18,11 +18,11 @@ public class Shop extends Feature implements Copyable, Serializable {
     }
 
 
-    public Shop(int id, String name, String address, ArrayList<Item> itemss) {
+    public Shop(int id, String name, String address, ArrayList<Item> itemsses) {
         this.id = id;
         this.name = name;
         this.address = address;
-        this.items = itemss;
+        this.items = itemsses;
     }
 
     /**
@@ -31,7 +31,7 @@ public class Shop extends Feature implements Copyable, Serializable {
      * @param item - object Item
      */
     public void addItem(Item item) {
-        items.add(item);
+        this.items.add(item);
     }
 
     /**
@@ -55,7 +55,7 @@ public class Shop extends Feature implements Copyable, Serializable {
     public Object copy(int id) {
         ArrayList<Item> new_items = new ArrayList<>();
         for (Item item :
-                items) {
+                this.items) {
             new_items.add((Item) item.copy(0));
         }
         return new Shop(id, this.name, this.address, new_items);

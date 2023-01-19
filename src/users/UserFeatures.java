@@ -1,6 +1,7 @@
 package users;
 
 import features.Feature;
+import shops.Flowers;
 import shops.Item;
 import shops.Shop;
 
@@ -176,21 +177,21 @@ public class UserFeatures extends Feature {
             return false;
         }
         try {
-            for (Item item : shop.getItems()) {
-                if (Objects.equals(words[0], item.getName())) {
-                    if (item.getCount() < Integer.parseInt(words[1])) {
+            for (Item items : shop.getItems()) {
+                if (Objects.equals(words[0], items.getName())) {
+                    if (items.getCount() < Integer.parseInt(words[1])) {
                         System.out.println(set("RED") + "The amount of product in the store is less than you want to buy!" + set("RESET"));
                         return false;
                     }
-                    if (logInClient.getMoney() < item.getCost() * Integer.parseInt(words[1])) {
+                    if (logInClient.getMoney() < items.getCost() * Integer.parseInt(words[1])) {
                         System.out.println(set("RED") + "You don't have enough money to buy!" + set("RESET"));
                         return false;
                     }
-                    item.decreaseCount(Integer.parseInt(words[1]));
+                    items.decreaseCount(Integer.parseInt(words[1]));
 
-                    double costPercent = item.getCost() - (logInClient.getDiscountPercent() / 100.0) * item.getCost();
+                    double costPercent = items.getCost() - (logInClient.getDiscountPercent() / 100.0) * items.getCost();
                     logInClient.pay(costPercent * Integer.parseInt(words[1]));
-                    logInClient.addItemToShoppingCart(item, Integer.parseInt(words[1]));
+                    logInClient.addItemToShoppingCart(items, Integer.parseInt(words[1]));
 
                     users.set(logInClient.getId(), logInClient);
                     writeUserData(users);
@@ -227,16 +228,16 @@ public class UserFeatures extends Feature {
             System.out.println(set("RED") + "You type the wrong request! TYPE NUMBER" + set("RESET"));
             return false;
         }
-        for (Item item : shop.getItems()) {
-            if (Objects.equals(words[0], item.getName())) {
-                item.increaseCount(count);
-                item.setCost(cost);
+        for (Item items : shop.getItems()) {
+            if (Objects.equals(words[0], items.getName())) {
+                items.increaseCount(count);
+                items.setCost(cost);
                 return true;
             }
         }
 
-        Item item = new Item(0, words[0], cost, count);
-        shop.addItem(item);
+        Flowers flowers = new Flowers(0, words[0], cost, count);
+        shop.addItem(flowers);
         return true;
     }
 

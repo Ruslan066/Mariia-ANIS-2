@@ -1,4 +1,5 @@
 import features.Feature;
+import shops.Flowers;
 import shops.Item;
 import shops.Shop;
 import users.User;
@@ -199,8 +200,8 @@ public class ProgramFacade extends Feature {
                 set("YELLOW") + "\n----------");
 
 
-        for (Item item : shops.get(id).getItems()) {
-            item.showItemInfo(percent);
+        for (Item items : shops.get(id).getItems()) {
+            items.showItemInfo(percent);
         }
 
         if (logInUser != null) {

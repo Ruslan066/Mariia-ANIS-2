@@ -1,6 +1,9 @@
 package users;
+import shops.Flowers;
 import shops.Item;
 import shops.ShoppingCart;
+
+import java.util.Objects;
 
 public class Client extends User {
     private double money;
@@ -18,11 +21,11 @@ public class Client extends User {
     /**
      * COMPLETE
      * This method add bought product to Shopping Cart
-     * @param item - bought product
+     * @param items - bought product
      * @param count - amount of item
      */
-    public void addItemToShoppingCart(Item item, int count) {
-        shoppingCart.addItem(item, count);
+    public void addItemToShoppingCart(Item items, int count) {
+        shoppingCart.addItem(items, count);
     }
 
     /**
@@ -79,6 +82,19 @@ public class Client extends User {
                         set("CYAN") +"\nDiscount Card: " + set("RESET")+ this.discountCard +
                         " - " + this.discountPercent + "%" +
                         set("CYAN") +"\nisEmployee: " + set("RESET")+ super.isEmployee());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Client client = (Client) o;
+        return Double.compare(client.money, money) == 0 && discountPercent == client.discountPercent && discountCard.equals(client.discountCard) && shoppingCart.equals(client.shoppingCart);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(money, discountCard, discountPercent, shoppingCart);
     }
 
     /**
