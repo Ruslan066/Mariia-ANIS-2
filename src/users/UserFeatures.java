@@ -162,7 +162,7 @@ public class UserFeatures extends Feature {
 
     /**
      * COMPLETE
-     * This method allows us to buy products in stores
+     * This method allows Client to buy products in stores
      *
      * @param choice - string name and count. Example (Peony 1)
      * @param shop   - store from the list of stores in which we will buy goods
@@ -171,13 +171,13 @@ public class UserFeatures extends Feature {
     public boolean buyItem(String choice, Shop shop) {
 
         String[] words = choice.trim().split("\\s+");
+        if (words.length != 2) {
+            System.out.println(set("RED") + "You type the wrong request!" + set("RESET"));
+            return false;
+        }
         try {
             for (Item item : shop.getItems()) {
                 if (Objects.equals(words[0], item.getName())) {
-                    if (words.length != 2) {
-                        System.out.println(set("RED") + "You type the wrong request!" + set("RESET"));
-                        return false;
-                    }
                     if (item.getCount() < Integer.parseInt(words[1])) {
                         System.out.println(set("RED") + "The amount of product in the store is less than you want to buy!" + set("RESET"));
                         return false;
@@ -203,6 +203,41 @@ public class UserFeatures extends Feature {
             return false;
         }
         return false;
+    }
+
+    /**
+     * COMPLETE
+     * This method allows Employee to add or udp products in stores
+     * @param choice - string name, count, cost. Example (Peony 15 3.55)
+     * @param shop - store from the list of stores in which we will add or udp goods
+     * @return - true: if successfully add or udp the product. false - If have error
+     */
+    public boolean addUdpItem(String choice, Shop shop) {
+        String[] words = choice.trim().split("\\s+");
+        int count;
+        double cost;
+        if (words.length != 3) {
+            System.out.println(set("RED") + "You type the wrong request!" + set("RESET"));
+            return false;
+        }
+        try {
+            count = Integer.parseInt(words[1]);
+            cost  = Double.parseDouble(words[2]);
+        } catch (Exception exception) {
+            System.out.println(set("RED") + "You type the wrong request! TYPE NUMBER" + set("RESET"));
+            return false;
+        }
+        for (Item item : shop.getItems()) {
+            if (Objects.equals(words[0], item.getName())) {
+                item.increaseCount(count);
+                item.setCost(cost);
+                return true;
+            }
+        }
+
+        Item item = new Item(0, words[0], cost, count);
+        shop.addItem(item);
+        return true;
     }
 
     // TODO: COMPLETE (UserFeatures, ProgramFacade, Feature, Item) НАЗВАНИЯ МЕТОДОВ С МАЛЕНЬКОЙ

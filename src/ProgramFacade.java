@@ -211,9 +211,15 @@ public class ProgramFacade extends Feature {
             //TODO сделать для employee свою реализацию
 
             do {
-                System.out.println("Type " + set("BLUE") + "name " + set("RESET") +
+                if(!logInUser.isEmployee())
+                    System.out.println("Type " + set("BLUE") + "name " + set("RESET") +
                         "of item and " + set("BLUE") + "count " + set("RESET") + "for buy, example:" +
                         set("BLUE") + " Peony 1" + set("RESET"));
+                else
+                    System.out.println("Type " + set("BLUE") + "name " + set("RESET") +
+                            "of item " + set("BLUE") + "count " + set("RESET") + "items " +
+                            set("BLUE") + "cost "+set("RESET")+"for add or update, example:" +
+                            set("BLUE") + " Peony 10 4.3" + set("RESET"));
                 System.out.println("Type " + set("BLUE") + "exit" + set("RESET") + " to go back:");
 
                 Scanner in = new Scanner(System.in);
@@ -222,8 +228,10 @@ public class ProgramFacade extends Feature {
                 if (Objects.equals(choice, "exit")) {
                     displayAccountPage();
                 }
-
-                flag = !userFeatures.buyItem(choice, shops.get(id));
+                if(!logInUser.isEmployee())
+                    flag = !userFeatures.buyItem(choice, shops.get(id));
+                else
+                    flag = !userFeatures.addUdpItem(choice, shops.get(id));
             } while (flag);
             writeShopData(shops);
 

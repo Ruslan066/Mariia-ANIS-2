@@ -8,13 +8,19 @@ public class Item extends Feature implements Copyable, Serializable {
     private final int id;
     private final String name;
     private int count;
-    private final double cost;
+    private double cost;
 
     public Item(int id, String name, double cost) {
         this.id = id;
         this.name = name;
         this.cost = cost;
         this.count = 10;
+    }
+    public Item(int id, String name, double cost, int count) {
+        this.id = id;
+        this.name = name;
+        this.cost = cost;
+        this.count = count;
     }
 
     /**
@@ -76,6 +82,10 @@ public class Item extends Feature implements Copyable, Serializable {
      */
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
     }
 
     /**
