@@ -1,8 +1,23 @@
-Project title: Simulating the work of a store
-Description: Desktop application that simulates the work of the store.
-Allows you to create products, create stores. Add products to stores.
-Create customers and employees. A customer can buy products, an employee can add products.
-The customer has the ability to top up their balance, use discount cards, view their purchase history.
-First, I came up with the theme, then I designed and decided on the user interface windows. 
-I created a class diagram and based on the future interface and class diagram I wrote all the code for the program.
-Used languages, software, tools and technologies: Java, design patterns (Composite, Prototype, Singleton, Facade), working with files, github
+# Simulating the Work of a Store
+
+## Description
+This is a desktop application that simulates the operations of a store. It allows you to create products, stores, customers, and employees. 
+
+## Features
+- **Product Creation**: Allows you to create and manage products.
+- **Store Creation**: Allows you to create and manage stores.
+- **Customer and Employee Creation**: Allows you to create and manage customers and employees.
+- **Product Management**: An employee can add products to the store.
+- **Shopping**: A customer can buy products from the store.
+- **Balance Management**: A customer has the ability to top up their balance.
+- **Discount Cards**: Customers can use discount cards for purchases.
+- **Purchase History**: Customers can view their purchase history.
+
+## Development Process
+The development process started with brainstorming the theme, followed by designing and deciding on the user interface windows. A class diagram was created based on the future interface, which served as the basis for writing all the code for the program.
+
+## Technologies Used
+- **Java**: The main programming language used for development.
+- **Design Patterns**: Utilized Composite, Prototype, Singleton, and Facade design patterns.
+- **File Handling**: Implemented functionality for working with files.
+- **GitHub**: Used for version control and source code management.
